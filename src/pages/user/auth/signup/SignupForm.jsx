@@ -1,10 +1,8 @@
 /* eslint-disable react/prop-types */
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { HiEye, HiEyeSlash } from "react-icons/hi2";
 import { useNavigate } from "react-router-dom";
-
-// import { useSignup } from "./useSignup";
 
 // services
 import { userRegister } from "../../../../services/auth/user/authUser";
@@ -19,11 +17,13 @@ import FormRowVertical from "../../../../ui/form/FormRowVertical";
 import FormRowPass from "../../../../ui/form/FormRowPass";
 import Input from "../../../../ui/form/Input";
 import Button from "../../../../ui/global/Button";
+
+// ui
 import SpinnerMini from "../../../../ui/spinner/SpinnerMini";
 
 function SignupForm({ sign }) {
     const navigate = useNavigate();
-    // const { signup, isLoading } = useState();
+
     const [isLoading, setIsLoading] = useState(false);
     const [errorsMessage, setErrorsMessage] = useState("");
     const [showPassword, setShowPassword] = useState(false);
@@ -82,9 +82,9 @@ function SignupForm({ sign }) {
         }
     };
 
-    useEffect(() => {
-        localStorage.removeItem("userVerifyAccount");
-    }, []);
+    // useEffect(() => {
+    //     localStorage.removeItem("userData");
+    // }, []);
 
     // let x = localStorage.getItem("userDataRegister");
     // console.log(`ddd`, JSON.parse(x));
@@ -99,12 +99,13 @@ function SignupForm({ sign }) {
                     <Input
                         type="text"
                         id="first_name"
+                        name="first_name"
                         disabled={isLoading}
                         {...registerForm("first_name", {
                             required: `This field is required`,
                             value: "mazen",
                         })}
-                        // autoComplete="off"
+                        autoComplete="off"
                         required
                     />
                 </FormRowVertical>
@@ -116,12 +117,13 @@ function SignupForm({ sign }) {
                     <Input
                         type="text"
                         id="last_name"
+                        name="last_name"
                         disabled={isLoading}
                         {...registerForm("last_name", {
                             required: `This field is required`,
                             value: "saad",
                         })}
-                        // autoComplete="off"
+                        autoComplete="off"
                         required
                     />
                 </FormRowVertical>
@@ -133,6 +135,7 @@ function SignupForm({ sign }) {
                     <Input
                         type="email"
                         id="email"
+                        name="email"
                         disabled={isLoading}
                         {...registerForm("email", {
                             required: `This field is required`,
@@ -140,10 +143,10 @@ function SignupForm({ sign }) {
                                 value: /\S+@\S+\.\S+/,
                                 message: `Please Provide a valid email address`,
                             },
-                            value: "p020@gmail.com",
+                            value: "p030@gmail.com",
                         })}
                         // Email regex: /\S+@\S+\.\S+/
-                        // autoComplete="off"
+                        autoComplete="off"
                         required
                     />
                 </FormRowVertical>
@@ -156,6 +159,7 @@ function SignupForm({ sign }) {
                     <Input
                         type={!showPassword ? "password" : "text"}
                         id="password"
+                        name="password"
                         disabled={isLoading}
                         {...registerForm("password", {
                             required: `This field is required`,
@@ -165,7 +169,7 @@ function SignupForm({ sign }) {
                             },
                             value: "Mazen@@1",
                         })}
-                        // autoComplete="off"
+                        autoComplete="off"
                         required
                     />
                     {!showPassword ? (
@@ -191,6 +195,7 @@ function SignupForm({ sign }) {
                     <Input
                         type={!showPassword ? "password" : "text"}
                         id="passwordConfirm"
+                        name="passwordConfirm"
                         disabled={isLoading}
                         {...registerForm("passwordConfirm", {
                             required: `This field is required`,
@@ -203,7 +208,7 @@ function SignupForm({ sign }) {
                                 `Passwords need to match`,
                             value: "Mazen@@1",
                         })}
-                        // autoComplete="off"
+                        autoComplete="off"
                         required
                     />
                 </FormRowPass>

@@ -31,11 +31,12 @@ function VerifyAccountForm() {
 
     const [isLoading, setIsLoading] = useState(false);
     const [errorsMessage, setErrorsMessage] = useState("");
+    const [canResend, setCanResend] = useState(true);
+    const [timer, setTimer] = useState(0);
+    let userData = localStorage.getItem("userData");
 
     const { register, formState, reset, handleSubmit } = useForm();
     const { errors } = formState;
-
-    let userDataRegister = localStorage.getItem("userDataRegister");
 
     const handleVerify = async ({ otp }) => {
         try {
@@ -44,6 +45,7 @@ function VerifyAccountForm() {
             }
 
             const { data, error } = await userVerifyAccount(otp);
+            // console.log("222", error);
 
             if (error) {
                 if (error?.message) {
@@ -53,7 +55,7 @@ function VerifyAccountForm() {
                 }
             } else {
                 navigate(`/login`);
-                localStorage.removeItem("userDataRegister");
+                // localStorage.removeItem("userData");
                 setIsLoading(true);
                 Toast(
                     "success",
@@ -67,10 +69,10 @@ function VerifyAccountForm() {
 
     const handleResendOTP = async () => {
         try {
-            if (!userDataRegister) {
+            if (!userData) {
                 return;
             }
-            let userJson = JSON.parse(userDataRegister);
+            let userJson = JSON.parse(userData);
             let email = userJson?.email;
 
             const { data, error } = await userResendOTP(email);
@@ -89,10 +91,33 @@ function VerifyAccountForm() {
                         "OTP has been resent to your email Successfully."
                     }`
                 );
+                startTimer();
             }
         } catch (error) {
             console.log(`Error: ${error}`);
         }
+    };
+
+    const startTimer = () => {
+        setCanResend(false);
+        setTimer(180);
+
+        const countdown = setInterval(() => {
+            setTimer((prev) => {
+                if (prev <= 1) {
+                    clearInterval(countdown);
+                    setCanResend(true);
+                    return 0;
+                }
+                return prev - 1;
+            });
+        }, 1000);
+    };
+
+    const formatTime = (seconds) => {
+        const minutes = Math.floor(seconds / 60);
+        const remainingSeconds = seconds % 60;
+        return `${minutes}:${remainingSeconds.toString().padStart(2, "0")}`;
     };
 
     // useEffect(() => {
@@ -111,10 +136,14 @@ function VerifyAccountForm() {
                     <img src={otpmail} alt="OTP Code" />
                 </div>
 
-                <FormRowVertical label="OTP Code" error={errors?.otp?.message}>
+                <FormRowVertical
+                    label="OTP Code"
+                    error={errors?.otp?.message || errorsMessage}
+                >
                     <Input
                         type="text"
                         id="otp"
+                        name="otp"
                         {...register("otp", {
                             required: `This field is required`,
                             pattern: {
@@ -123,7 +152,7 @@ function VerifyAccountForm() {
                                 message: `Please Provide a valid OTP code.`,
                             },
                         })}
-                        // autoComplete="off"
+                        autoComplete="off"
                         required
                         // value={email}
                         // onChange={(e) => setEmail(e.target.value)}
@@ -136,10 +165,16 @@ function VerifyAccountForm() {
                         Don't get the Code?
                         <a
                             onClick={(e) => {
-                                handleResendOTP();
+                                if (canResend) {
+                                    handleResendOTP();
+                                }
+                            }}
+                            style={{
+                                color: canResend ? "blue" : "gray",
+                                cursor: canResend ? "pointer" : "not-allowed",
                             }}
                         >
-                            Resend
+                            Resend {timer > 0 && `(${formatTime(timer)})`}
                         </a>
                     </p>
                 </div>

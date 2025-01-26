@@ -1,17 +1,13 @@
-// import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-// import styles from "./Login.module.css";
-// import PageNav from "../ui/header/PageNav";
-// import Button from "../components/Button";
+// component
+import VerifyAccountForm from "./VerifyAccountForm";
 
-// import { useAuth } from "../contexts/FakeAuthContext";
-// import { useNavigate } from "react-router-dom";
+// ui form
 import Main from "../../../../ui/global/Main";
 import Heading from "../../../../ui/global/Heading";
 import DivForm from "../../../../ui/form/DivForm";
 import Button from "../../../../ui/global/Button";
-import VerifyAccountForm from "./VerifyAccountForm";
 
 export default function VerifyAccount() {
     const navigate = useNavigate();

@@ -94,9 +94,8 @@ export const userRegister = async (
         // console.log(`userRegister`, { data, error: null }); // email: "m3@gmail.com"full_name: "Mazen Saad"
 
         if (data) {
-            localStorage.removeItem("userDataRegister");
-            let registerDataUser = localStorage.setItem(
-                "userDataRegister",
+            let userData = localStorage.setItem(
+                "userData",
                 JSON.stringify(data?.data)
             );
         }
@@ -127,9 +126,8 @@ export const userVerifyAccount = async (otp_code) => {
         });
 
         if (data) {
-            localStorage.removeItem("userDataRegister");
-            let verifyDataUser = localStorage.setItem(
-                "userVerifyAccount",
+            let userData = localStorage.setItem(
+                "userData",
                 JSON.stringify(data?.data)
             );
         }
@@ -138,7 +136,7 @@ export const userVerifyAccount = async (otp_code) => {
         return { data, error: null };
     } catch (error) {
         // Handling errors and returning data and error information
-        console.log(`eee`, error);
+        // console.log(`eee`, error);
         return {
             data: null,
             error: error?.response?.data || "Something went wrong",
@@ -164,7 +162,7 @@ export const userResendOTP = async (email) => {
         return { data, error: null };
     } catch (error) {
         // Handling errors and returning data and error information
-        console.log(`eee`, error);
+        // console.log(`eee`, error);
         return {
             data: null,
             error: error?.response?.data || "Something went wrong",
@@ -174,7 +172,7 @@ export const userResendOTP = async (email) => {
 
 // Function to handle user registration
 export const userLogin = async (email, password) => {
-    console.log(`e`, email, password);
+    // console.log(`e`, email, password);
     try {
         // Making a POST request to login a new user
         const { data } = await axios.post("auth/patient/login/", {
@@ -191,9 +189,8 @@ export const userLogin = async (email, password) => {
         });
 
         if (data) {
-            localStorage.removeItem("userVerifyAccount");
-            let loginDataUser = localStorage.setItem(
-                "loginDataUser",
+            let userData = localStorage.setItem(
+                "userData",
                 JSON.stringify(data?.data)
             );
             let accesstokenUser = localStorage.setItem(

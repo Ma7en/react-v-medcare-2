@@ -13,9 +13,11 @@ const Input = styled.input`
     box-shadow: var(--shadow-sm);
     text-transform: none;
     font-size: 2rem;
+
     &:focus,
     &:active,
     &:hover,
+    &:visited,
     &:internal-autofill-selected {
         background-color: var(--back-sec-2);
     }

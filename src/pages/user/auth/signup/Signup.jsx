@@ -1,19 +1,13 @@
-/* eslint-disable no-unused-vars */
-import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useForm } from "react-hook-form";
 
-// import styles from "./Login.module.css";
-// import PageNav from "../ui/header/PageNav";
-// import Button from "../components/Button";
+// components
+import SignupForm from "./SignupForm";
 
-// import { useAuth } from "../contexts/FakeAuthContext";
+// ui
 import Main from "../../../../ui/global/Main";
-// import { useSignup } from "../features/authentication/useSignup";
 import DivForm from "../../../../ui/form/DivForm";
 import Heading from "../../../../ui/global/Heading";
 import Button from "../../../../ui/global/Button";
-import SignupForm from "./SignupForm";
 
 export default function Signup() {
     const navigate = useNavigate();

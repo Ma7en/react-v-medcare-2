@@ -1,8 +1,9 @@
-/* eslint-disable react/prop-types */
 import { HiOutlineMoon, HiOutlineSun } from "react-icons/hi2";
 
+// context
 import { useDarkMode } from "../../contexts/DarkModeContext";
 
+// ui
 import ButtonIcon from "../global/ButtonIcon";
 
 function DarkModeToggle() {
@@ -10,7 +11,11 @@ function DarkModeToggle() {
 
     return (
         <>
-            <ButtonIcon onClick={() => toggleDarkMode()}>
+            <ButtonIcon
+                onClick={() => {
+                    toggleDarkMode();
+                }}
+            >
                 {isDarkMode ? <HiOutlineSun /> : <HiOutlineMoon />}
             </ButtonIcon>
         </>

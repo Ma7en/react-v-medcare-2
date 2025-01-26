@@ -1,24 +1,25 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { HiEye, HiEyeSlash } from "react-icons/hi2";
 import { useForm } from "react-hook-form";
 
-//
-// import { useLogin } from "./useLogin";
+// serivces
+import { userLogin } from "../../../../services/auth/user/authUser";
 
+// plugin
+import Toast from "../../../../plugin/Toast";
+
+// ui form
 import Form from "../../../../ui/form/Form";
 import FormRowVertical from "../../../../ui/form/FormRowVertical";
 import Input from "../../../../ui/form/Input";
 import FormRowPass from "../../../../ui/form/FormRowPass";
 import Button from "../../../../ui/global/Button";
-import SpinnerMini from "../../../../ui/spinner/SpinnerMini";
-import { useNavigate } from "react-router-dom";
-import Toast from "../../../../plugin/Toast";
-import { userLogin } from "../../../../services/auth/user/authUser";
 
-// hi2 HiEye
-// hi2 HiEyeSlash
+// ui
+import SpinnerMini from "../../../../ui/spinner/SpinnerMini";
 
 function LoginForm({ sign }) {
     const navigate = useNavigate();
@@ -27,14 +28,13 @@ function LoginForm({ sign }) {
     const [errorsMessage, setErrorsMessage] = useState("");
     const [showPassword, setShowPassword] = useState(false);
 
-    let userVerifyAccount = localStorage.getItem("userVerifyAccount");
-    let userJson = JSON.parse(userVerifyAccount);
+    let userData = localStorage.getItem("userData");
+    let userJson = JSON.parse(userData);
 
     const { register, formState, reset, handleSubmit } = useForm();
     const { errors } = formState;
 
     const handleLogin = async ({ email, password }) => {
-        console.log(`login`, email, password);
         try {
             if (errors.root) {
                 return;
@@ -42,23 +42,38 @@ function LoginForm({ sign }) {
 
             const { data, error } = await userLogin(email, password);
 
-            console.log(`--->`, data);
-            console.log(`----->`, error);
+            // console.log(`--->`, data);
+            // console.log(`----->`, error);
+            // console.log(`----->`, error?.message);
+            // console.log(`----->`, error?.data?.is_verified === false);
 
-            // if (error) {
-            //     if (error?.message?.email[0]) {
-            //         setErrorsMessage(error?.message?.email[0]);
-            //         Toast("error", `${error?.message?.email[0]}.`);
-            //         setIsLoading(false);
-            //     }
-            // } else {
-            //     setIsLoading(true);
-            //     Toast(
-            //         "success",
-            //         `${data?.message || "Patient Login Successfully."}`
-            //     );
-            //     navigate(`/${"e"}/profile`);
-            // }
+            if (error) {
+                if (error?.message) {
+                    Toast("error", `${error?.message}.`);
+                    setErrorsMessage(error?.message);
+                }
+
+                if (error?.data?.is_verified == false) {
+                    let userData = localStorage.setItem(
+                        "userData",
+                        JSON.stringify(error?.data)
+                    );
+                    navigate(`/verifyaccount`);
+                }
+
+                if (error?.message?.email[0]) {
+                    setErrorsMessage(error?.message?.email[0]);
+                    Toast("error", `${error?.message?.email[0]}.`);
+                    setIsLoading(false);
+                }
+            } else {
+                setIsLoading(true);
+                Toast(
+                    "success",
+                    `${data?.message || "Patient Login Successfully."}`
+                );
+                navigate(`/${"e"}/profile`);
+            }
         } catch (error) {
             console.log(`Error: ${error}`);
         }
@@ -69,11 +84,12 @@ function LoginForm({ sign }) {
             <Form onSubmit={handleSubmit(handleLogin)}>
                 <FormRowVertical
                     label="Email address"
-                    error={errors?.email?.message}
+                    error={errors?.email?.message || errorsMessage}
                 >
                     <Input
                         type="email"
                         id="email"
+                        name="email"
                         disabled={isLoading}
                         {...register("email", {
                             required: `This field is required`,
@@ -81,9 +97,9 @@ function LoginForm({ sign }) {
                                 value: /\S+@\S+\.\S+/,
                                 message: `Please Provide a valid email address`,
                             },
-                            // value: userJson?.email || "p001@gmail.com",
+                            value: userJson?.email || "p001@gmail.com",
                         })}
-                        // autoComplete="off"
+                        autoComplete="off"
                         required
                         // value={email}
                         // onChange={(e) => setEmail(e.target.value)}
@@ -92,13 +108,14 @@ function LoginForm({ sign }) {
 
                 <FormRowPass
                     label="Password"
-                    error={errors?.password?.message}
+                    error={errors?.password?.message || errorsMessage}
                     sign={sign}
                     // icon={<HiEye />}
                 >
                     <Input
                         type={!showPassword ? "password" : "text"}
                         id="password"
+                        name="password"
                         disabled={isLoading}
                         {...register("password", {
                             required: `This field is required`,
@@ -106,9 +123,9 @@ function LoginForm({ sign }) {
                                 value: 8,
                                 message: `Password needs a minimum of 8 characters`,
                             },
-                            // value: "Mazen@@1",
+                            value: "Mazen@@1",
                         })}
-                        // autoComplete="off"
+                        autoComplete="off"
                         required
                         // value={password}
                         // onChange={(e) => setPassword(e.target.value)}
