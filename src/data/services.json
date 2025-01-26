@@ -1,0 +1,46 @@
+{
+    "services": [
+        {
+            "icon": "<FaNotesMedical />",
+            "image": "France",
+            "title": "free checkups",
+            "description": "Lorem Ipsum Dolor Sit Amet Consectetur, Adipisicing Elit. Ad, Omnis.",
+            "id": 1
+        },
+        {
+            "icon": "<FaAmbulance />",
+            "image": "France",
+            "title": "24/7 Ambulance",
+            "description": "Lorem Ipsum Dolor Sit Amet Consectetur, Adipisicing Elit. Ad, Omnis.",
+            "id": 2
+        },
+        {
+            "icon": "<FaUserMd />",
+            "image": "France",
+            "title": "Expert Doctors",
+            "description": "Lorem Ipsum Dolor Sit Amet Consectetur, Adipisicing Elit. Ad, Omnis.",
+            "id": 3
+        },
+        {
+            "icon": "  <FaPills />",
+            "image": "France",
+            "title": "Medicines",
+            "description": "Lorem Ipsum Dolor Sit Amet Consectetur, Adipisicing Elit. Ad, Omnis.",
+            "id": 4
+        },
+        {
+            "icon": "<FaProcedures />",
+            "image": "France",
+            "title": "Bed Facility",
+            "description": "Lorem Ipsum Dolor Sit Amet Consectetur, Adipisicing Elit. Ad, Omnis.",
+            "id": 5
+        },
+        {
+            "icon": "<FaHeartbeat />",
+            "image": "France",
+            "title": "Total Care",
+            "description": "Lorem Ipsum Dolor Sit Amet Consectetur, Adipisicing Elit. Ad, Omnis.",
+            "id": 6
+        }
+    ]
+}

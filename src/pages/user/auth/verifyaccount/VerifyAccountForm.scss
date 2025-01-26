@@ -1,0 +1,33 @@
+.verifyaccountform {
+    .image {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-bottom: none !important;
+
+        img {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            max-width: 30%;
+        }
+    }
+
+    .resend {
+        display: flex;
+        margin-block: 20px;
+        border-bottom: none !important;
+        font-size: 1.8rem;
+        user-select: none;
+        p {
+            color: var(--green);
+            font-weight: bold;
+
+            a {
+                color: var(--black);
+                text-decoration: underline;
+                cursor: pointer;
+            }
+        }
+    }
+}

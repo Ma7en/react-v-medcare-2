@@ -1,0 +1,25 @@
+{
+    "reviews": [
+        {
+            "image": "images/review/pic-1.png",
+            "name": "john deo",
+            "starrating": "4",
+            "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam sapiente nihil aperiam? Repellat sequi nisi aliquid perspiciatis libero nobis rem numquam nesciunt alias sapiente minus voluptatem, reiciendis consequuntur optio dolorem! ",
+            "id": 1
+        },
+        {
+            "image": "images/review/pic-2.png",
+            "name": "john deo",
+            "starrating": "3",
+            "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam sapiente nihil aperiam? Repellat sequi nisi aliquid perspiciatis libero nobis rem numquam nesciunt alias sapiente minus voluptatem, reiciendis consequuntur optio dolorem! ",
+            "id": 2
+        },
+        {
+            "image": "images/review/pic-3.png",
+            "name": "john deo",
+            "starrating": "5",
+            "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam sapiente nihil aperiam? Repellat sequi nisi aliquid perspiciatis libero nobis rem numquam nesciunt alias sapiente minus voluptatem, reiciendis consequuntur optio dolorem! ",
+            "id": 3
+        }
+    ]
+}
