@@ -50,7 +50,37 @@ function AboutCom() {
                         us
                     </Heading>
 
-                    {aboutus?.length > 0 &&
+                    <div className="row">
+                        <Picture
+                            src={aboutimage}
+                            alt={`We Take Care Of Your Healthy Life`}
+                            caption={`We Take Care Of Your Healthy Life`}
+                        />
+
+                        <div className="content">
+                            <Heading as="h3">
+                                We Take Care Of Your Healthy Life
+                            </Heading>
+
+                            <p>
+                                Lorem Ipsum Dolor Sit Amet Consectetur,
+                                Adipisicing Elit. Iure Ducimus, Quod Ex
+                                Cupiditate Ullam In Assumenda Maiores Et Culpa
+                                Odit Tempora Ipsam Qui, Quisquam Quis Facere
+                                Iste Fuga, Minus Nesciunt. Lorem Ipsum Dolor,
+                                Sit Amet Consectetur Adipisicing Elit. Natus
+                                Vero Ipsam Laborum Porro Voluptates Voluptatibus
+                                A Nihil Temporibus Deserunt Vel?
+                            </p>
+
+                            <Link to="/aboutus" className="btn">
+                                <span>learn more</span>
+                                <FaChevronRight />
+                            </Link>
+                        </div>
+                    </div>
+
+                    {/* {aboutus?.length > 0 &&
                         aboutus?.map((about, index) => (
                             <div className="row" key={index}>
                                 <Picture
@@ -71,7 +101,7 @@ function AboutCom() {
                                     </Link>
                                 </div>
                             </div>
-                        ))}
+                        ))} */}
 
                     {/* <div className="row">
                         <div className="image">

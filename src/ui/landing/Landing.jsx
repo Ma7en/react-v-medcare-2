@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { useNavigate } from "react-router-dom";
 import { FaChevronRight } from "react-icons/fa";
 
@@ -9,7 +8,6 @@ import Heading from "../global/Heading";
 import Button from "../global/Button";
 
 // assets
-import imagenotfound from "../../assets/images/error/doctor-woman-400px-2-.png";
 import landingpage from "../../assets/images/home/home-img.svg";
 
 function Landing() {
@@ -20,7 +18,7 @@ function Landing() {
             <section className="landing" id="landing">
                 <div className="container">
                     <div className="image">
-                        <img src={landingpage} alt={`home landing page`} />
+                        <img src={landingpage} alt={`home page - landing`} />
                     </div>
 
                     <div className="content">

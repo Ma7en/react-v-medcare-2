@@ -496,11 +496,13 @@ img {
     .container {
         padding-top: var(--padding-sc);
         padding-bottom: var(--padding-sc);
+
         .box-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(27rem, 1fr));
             /* grid-template-columns: repeat(auto-fill, minmax(27rem, 1fr)); */
             gap: 2rem;
+
             .box {
                 background-color: var(--back-box);
                 box-shadow: var(--box-shadow);
@@ -511,20 +513,27 @@ img {
                 -moz-border-radius: 0.5rem;
                 -ms-border-radius: 0.5rem;
                 -o-border-radius: 0.5rem;
+
                 > svg {
                     color: var(--green);
                     font-size: 5rem;
                     padding-bottom: 0.5rem;
                 }
+
                 h3 {
                     color: var(--black);
                     font-size: 2.5rem;
                     padding: 1rem 0;
                 }
+
                 p {
                     color: var(--light-color);
                     font-size: 1.4rem;
                     line-height: 2;
+                }
+
+                button {
+                    margin-top: 10px;
                 }
             }
         }
@@ -547,30 +556,39 @@ img {
     .container {
         padding-top: var(--padding-sc);
         padding-bottom: var(--padding-sc);
+
         .row {
             display: flex;
             align-items: center;
             flex-wrap: wrap;
             gap: 2rem;
+
             .image {
                 flex: 1 1 45rem;
                 img {
                     width: 100%;
                 }
             }
+
             .content {
                 flex: 1 1 45rem;
+
                 h3 {
                     color: var(--black);
                     text-shadow: var(--text-shadow);
                     font-size: 4rem;
                     line-height: 1.8;
                 }
+
                 p {
                     color: var(--light-color);
                     padding: 1rem 0;
                     font-size: 1.5rem;
                     line-height: 1.8;
+                }
+
+                .btn {
+                    margin-top: 10px;
                 }
             }
         }
@@ -1027,9 +1045,11 @@ img {
 .loginpage {
     // width: 100%;
     min-height: calc(100vh - 150px);
+
     .container {
         // padding-top: var(--padding-sc);
         padding-bottom: var(--padding-sc);
+
         section {
             display: flex;
             flex-direction: column;

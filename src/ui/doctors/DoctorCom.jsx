@@ -1,6 +1,5 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-
 import {
     FaFacebookF,
     FaInstagram,
@@ -24,31 +23,34 @@ function DoctorCom({ doctor }) {
     return (
         <>
             <div className="box">
-                <img src={doctorimage || imagenotfound} alt={`doctor${id}`} />
+                <img
+                    src={doctorimage || imagenotfound}
+                    alt={`doctor-${id}-${name}`}
+                />
 
                 <Heading as="h5">{name}</Heading>
 
                 <span>{experience}</span>
 
                 <div className="share">
-                    {social?.map((soc) => (
+                    {social?.map((soc, index) => (
                         <Link
-                            to={`${soc.link}`}
+                            to={`${soc?.link}`}
                             target="_blank"
-                            key={soc.id}
-                            className={`${!soc.link && "none"}`}
+                            key={index}
+                            className={`${!soc?.link && "none"}`}
                         >
                             {/* <FaFacebookF /> */}
-                            {/* <IconCom name={soc.name} /> */}
-                            {soc.name === "facebook" && <FaFacebookF />}
+                            {/* <IconCom name={soc?.name} /> */}
+                            {soc?.name === "facebook" && <FaFacebookF />}
 
-                            {soc.name === "twitter" && <FaTwitter />}
+                            {soc?.name === "twitter" && <FaTwitter />}
 
-                            {soc.name === "instagram" && <FaInstagram />}
+                            {soc?.name === "instagram" && <FaInstagram />}
 
-                            {soc.name === "linkedin" && <FaLinkedinIn />}
+                            {soc?.name === "linkedin" && <FaLinkedinIn />}
 
-                            {soc.name === "pinterest" && <FaPinterestP />}
+                            {soc?.name === "pinterest" && <FaPinterestP />}
                         </Link>
                     ))}
                 </div>

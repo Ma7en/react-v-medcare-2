@@ -1,6 +1,4 @@
-/* eslint-disable no-unused-vars */
 // assets
-import imagenotfound from "../../assets/images/error/doctor-woman-400px-2-.png";
 import bookimage from "../../assets/images/book/book-img.svg";
 
 function BookCom() {
@@ -15,7 +13,7 @@ function BookCom() {
 
                     <div className="row">
                         <div className="image">
-                            <img src={bookimage} alt="book img" />
+                            <img src={bookimage} alt={`book img`} />
                         </div>
 
                         <form action="#">

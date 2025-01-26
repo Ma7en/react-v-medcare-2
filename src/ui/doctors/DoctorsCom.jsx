@@ -7,12 +7,12 @@ import {
     FaPinterestP,
 } from "react-icons/fa";
 
-// utils
+// data
+import { doctors } from "../../data/variablesdata";
 
 // commponents
-import Heading from "../global/Heading";
 import DoctorCom from "./DoctorCom";
-import { doctors } from "../../data/variablesdata";
+import Heading from "../global/Heading";
 
 function DoctorsCom() {
     return (

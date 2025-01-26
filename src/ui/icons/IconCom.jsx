@@ -15,8 +15,13 @@ const StyledIconBox = styled.div`
     padding: 2.5rem;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
+
+    @media (max-width: 768px) {
+        padding: 1.6rem 1rem;
+    }
+
     svg {
         font-size: 4.5rem;
         color: var(--green);

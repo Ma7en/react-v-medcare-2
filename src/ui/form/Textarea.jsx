@@ -7,7 +7,7 @@ const Textarea = styled.textarea`
     /* background-color: var(--color-grey-0); */
     /* box-shadow: var(--shadow-sm); */
     width: 100%;
-    min-height: 15rem;
+    min-height: 20rem;
 
     background-color: var(--back-sec-2);
     border-radius: var(--border-radius-sm);
@@ -15,6 +15,14 @@ const Textarea = styled.textarea`
     border: var(--border);
     caret-color: var(--green);
     box-shadow: var(--shadow-sm);
+
+    &:focus,
+    &:active,
+    &:hover,
+    &:visited,
+    &:internal-autofill-selected {
+        background-color: var(--back-sec-2);
+    }
 `;
 
 export default Textarea;
