@@ -36,7 +36,7 @@ import HomepageLayout from "../components/layouts/Homepagelayout";
 // import NotFoundPage from "../pages/app/notfoundpage/NotFoundPage";
 
 // pages lazy
-// const HomePage = lazy(() => import("../pages/app/home/HomePage"));
+const HomePage = lazy(() => import("../pages/app/homepage/Homepage"));
 // const AboutPage = lazy(() => import("../pages/app/aboutpage/AboutPage"));
 // const PortfolioPage = lazy(() =>
 //     import("../pages/app/portfoliopage/PortfolioPage")
@@ -92,7 +92,7 @@ import HomepageLayout from "../components/layouts/Homepagelayout";
 // =================================================================
 // ui components
 import Loader from "../ui/loader/Loader";
-import HomePage from "../pages/app/homepage/Homepage";
+// import HomePage from "../pages/app/homepage/Homepage";
 import ScrollToTop from "../hooks/ScrollToTop";
 import ContactPage from "../pages/app/contact/ContactPage";
 import Login from "../pages/user/auth/login/Login";
