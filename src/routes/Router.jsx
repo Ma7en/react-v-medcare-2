@@ -92,8 +92,8 @@ import HomepageLayout from "../components/layouts/Homepagelayout";
 // =================================================================
 // ui components
 import Loader from "../ui/loader/Loader";
-// import HomePage from "../pages/app/homepage/HomePage";
-import HomePage from "../pages/app/homepage/Home";
+
+import HomePage from "../pages/app/homepage/HomePage";
 
 import ScrollToTop from "../hooks/ScrollToTop";
 import ContactPage from "../pages/app/contact/ContactPage";
