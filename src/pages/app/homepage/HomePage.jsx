@@ -11,7 +11,7 @@ import ReviewsCom from "../../../ui/reviews/ReviewsCom";
 import BlogsCom from "../../../ui/blogs/BlogsCom";
 import LinksCom from "../../../ui/links/LinksCom";
 
-export default function HomePage() {
+function HomePage() {
     // const navigate = useNavigate();
 
     return (
@@ -28,3 +28,4 @@ export default function HomePage() {
         </>
     );
 }
+export default HomePage;
