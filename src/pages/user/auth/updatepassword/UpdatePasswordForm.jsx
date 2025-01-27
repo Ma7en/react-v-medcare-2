@@ -34,65 +34,67 @@ function UpdatePasswordForm() {
     }
 
     return (
-        <Form type="updata" onSubmit={handleSubmit(onSubmit)}>
-            <FormRowPass
-                label="New Password (min 8 characters)"
-                error={errors?.password?.message}
-                // sign={sign}
-            >
-                <>
+        <>
+            <Form type="updata" onSubmit={handleSubmit(onSubmit)}>
+                <FormRowPass
+                    label="New Password (min 8 characters)"
+                    error={errors?.password?.message}
+                    // sign={sign}
+                >
+                    <>
+                        <Input
+                            type={!showPassword ? "password" : "text"}
+                            id="password"
+                            autoComplete="current-password"
+                            disabled={isUpdating}
+                            {...register("password", {
+                                required: "This field is required",
+                                minLength: {
+                                    value: 8,
+                                    message:
+                                        "Password needs a minimum of 8 characters",
+                                },
+                            })}
+                        />
+                        {!showPassword ? (
+                            <HiEye
+                                onClick={() => setShowPassword((show) => !show)}
+                            />
+                        ) : (
+                            <HiEyeSlash
+                                onClick={() => setShowPassword((show) => !show)}
+                            />
+                        )}
+                    </>
+                </FormRowPass>
+
+                <FormRowPass
+                    label="Confirm password"
+                    error={errors?.passwordConfirm?.message}
+                >
                     <Input
                         type={!showPassword ? "password" : "text"}
-                        id="password"
-                        autoComplete="current-password"
+                        autoComplete="new-password"
+                        id="passwordConfirm"
                         disabled={isUpdating}
-                        {...register("password", {
+                        {...register("passwordConfirm", {
                             required: "This field is required",
-                            minLength: {
-                                value: 8,
-                                message:
-                                    "Password needs a minimum of 8 characters",
-                            },
+                            validate: (value) =>
+                                getValues().password === value ||
+                                "Passwords need to match",
                         })}
                     />
-                    {!showPassword ? (
-                        <HiEye
-                            onClick={() => setShowPassword((show) => !show)}
-                        />
-                    ) : (
-                        <HiEyeSlash
-                            onClick={() => setShowPassword((show) => !show)}
-                        />
-                    )}
-                </>
-            </FormRowPass>
+                </FormRowPass>
 
-            <FormRowPass
-                label="Confirm password"
-                error={errors?.passwordConfirm?.message}
-            >
-                <Input
-                    type={!showPassword ? "password" : "text"}
-                    autoComplete="new-password"
-                    id="passwordConfirm"
-                    disabled={isUpdating}
-                    {...register("passwordConfirm", {
-                        required: "This field is required",
-                        validate: (value) =>
-                            getValues().password === value ||
-                            "Passwords need to match",
-                    })}
-                />
-            </FormRowPass>
+                <FormRow>
+                    <Button onClick={reset} type="reset" variation="secondary">
+                        Cancel
+                    </Button>
 
-            <FormRow>
-                <Button onClick={reset} type="reset" variation="secondary">
-                    Cancel
-                </Button>
-
-                <Button disabled={isUpdating}>Update password</Button>
-            </FormRow>
-        </Form>
+                    <Button disabled={isUpdating}>Update password</Button>
+                </FormRow>
+            </Form>
+        </>
     );
 }
 

@@ -39,6 +39,7 @@ const Div = styled.div`
         flex-direction: column;
         justify-content: stretch;
         padding-inline: 2rem;
+        max-width: 100%;
     }
 
     button {

@@ -5,6 +5,7 @@ const Form = styled.form`
     max-width: 48rem;
     /* box-shadow: var(--shadow-lg); */
     box-shadow: var(--box-shadow);
+
     ${(props) =>
         props.type === "regular" &&
         css`
@@ -45,6 +46,7 @@ const Form = styled.form`
 
     @media (max-width: 768px) {
         padding-inline: 2rem;
+        max-width: 100%;
     }
 
     > div:not(:last-child) {

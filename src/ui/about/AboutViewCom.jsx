@@ -3,11 +3,13 @@ import { FaChevronRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
+// data
+import { aboutus } from "../../data/variablesdata";
+
 import Heading from "../global/Heading";
 import Spinner from "../spinner/Spinner";
 import Video from "../videos/Video";
 import Picture from "../pictures/Picture";
-import { aboutus } from "../../data/variablesdata";
 
 // import { aboutus as aboutusVar } from "../../utils/vars";
 // import { useAboutUs } from "../../features/aboutus/useAboutUs";

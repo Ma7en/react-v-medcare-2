@@ -7,6 +7,9 @@ import {
     FaPinterestP,
 } from "react-icons/fa";
 
+// style
+import "./DoctorsCom.scss";
+
 // data
 import { doctors } from "../../data/variablesdata";
 
@@ -18,6 +21,13 @@ function DoctorsCom() {
     return (
         <>
             <section className="doctors" id="doctors">
+                <div className="waves">
+                    <div className="wave" id="wave1" />
+                    <div className="wave" id="wave2" />
+                    <div className="wave" id="wave3" />
+                    <div className="wave" id="wave4" />
+                </div>
+
                 <div className="container">
                     <Heading as="h2">
                         our

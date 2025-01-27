@@ -2,6 +2,9 @@
 import { useState } from "react";
 import { FaStar, FaStarHalfAlt } from "react-icons/fa";
 
+// style
+import "./ReviewsCom.scss";
+
 // data
 import { reviews } from "../../data/variablesdata";
 
@@ -17,6 +20,13 @@ function ReviewsCom() {
     return (
         <>
             <section className="review" id="review">
+                <div className="waves">
+                    <div className="wave" id="wave1" />
+                    <div className="wave" id="wave2" />
+                    <div className="wave" id="wave3" />
+                    <div className="wave" id="wave4" />
+                </div>
+
                 <div className="container">
                     <h1 className="heading">
                         client's

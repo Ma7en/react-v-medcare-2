@@ -1,6 +1,4 @@
-// import { useNavigate } from "react-router-dom";
-
-//
+// components
 import Landing from "../../../ui/landing/Landing";
 import IconsCom from "../../../ui/icons/IconsCom";
 import ServicesCom from "../../../ui/services/ServicesCom";

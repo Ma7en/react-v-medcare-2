@@ -214,6 +214,92 @@ export const userLogin = async (email, password) => {
     }
 };
 
+// Function to handle user change password
+export const userChangePassword = async (
+    refresh_token,
+    old_password,
+    new_password,
+    confirm_password
+) => {
+    try {
+        // Making a POST request to register a new user
+        const { data } = await axios.post("auth/patient/change-password/", {
+            refresh_token,
+            old_password,
+            new_password,
+            confirm_password,
+        });
+
+        // console.log(`ee`, data);
+
+        // Logging in the newly registered user and displaying success toast
+        // await login(email, password);
+
+        // Displaying a success toast notification
+        Toast.fire({
+            icon: "success",
+            title: "Sign Up Successfully",
+        });
+
+        // console.log(`userRegister`, { data, error: null }); // email: "m3@gmail.com"full_name: "Mazen Saad"
+
+        if (data) {
+            let userData = localStorage.setItem(
+                "userData",
+                JSON.stringify(data?.data)
+            );
+        }
+
+        // Returning data and error information
+        return { data, error: null };
+    } catch (error) {
+        // Handling errors and returning data and error information
+        return {
+            data: null,
+            error: error?.response?.data || "Something went wrong",
+        };
+    }
+};
+
+// Function to handle user Reset password
+export const userResetPassword = async (email) => {
+    try {
+        // Making a POST request to register a new user
+        const { data } = await axios.post("auth/patient/reset-password/", {
+            email,
+        });
+
+        // console.log(`ee`, data);
+
+        // Logging in the newly registered user and displaying success toast
+        // await login(email, password);
+
+        // Displaying a success toast notification
+        Toast.fire({
+            icon: "success",
+            title: "Reset Password Successfully",
+        });
+
+        // console.log(`userRegister`, { data, error: null }); // email: "m3@gmail.com"full_name: "Mazen Saad"
+
+        if (data) {
+            let userData = localStorage.setItem(
+                "userData",
+                JSON.stringify(data?.data)
+            );
+        }
+
+        // Returning data and error information
+        return { data, error: null };
+    } catch (error) {
+        // Handling errors and returning data and error information
+        return {
+            data: null,
+            error: error?.response?.data || "Something went wrong",
+        };
+    }
+};
+
 // =================================================================
 // Function to handle user logout
 export const logout = () => {

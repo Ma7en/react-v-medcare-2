@@ -1,14 +1,24 @@
+// ui
 import Video from "../videos/Video";
+import BookForm from "./BookForm";
+import Heading from "../global/Heading";
+
+// assets
+import bookvideo from "../../assets/vidoes/neurorons.mp4";
 
 function BookReview() {
     return (
         <>
-            <div className="bookreview">
+            <div className="book">
                 <div className="container">
                     <section>
-                        <Video src="/vidoes/neurorons.mp4" />
+                        <Heading as="h3">book appointment</Heading>
 
-                        <form action="#">
+                        <Video src={bookvideo} />
+
+                        <BookForm />
+
+                        {/* <form action="#">
                             <h3>book appointment</h3>
                             <input
                                 type="text"
@@ -41,7 +51,7 @@ function BookReview() {
                                 defaultValue="book now"
                                 className="btn"
                             />
-                        </form>
+                        </form> */}
                     </section>
                 </div>
             </div>

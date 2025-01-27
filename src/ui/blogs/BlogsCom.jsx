@@ -1,15 +1,31 @@
 // import { FaCalendar, FaChevronRight, FaUser } from "react-icons/fa";
 
-// utils
+// style
+import "./BlogsCom.scss";
+
+// data
+import { blogs } from "../../data/variablesdata";
 
 // components
-import { blogs } from "../../data/variablesdata";
 import BlogCom from "./BlogCom";
+import { useLocation } from "react-router-dom";
 
 function BlogsCom() {
+    const { pathname } = useLocation();
+
     return (
         <>
-            <section className="blogs" id="blogs">
+            <section
+                className={`blogs ${pathname != "/blogs" ? "blogs-home" : ""}`}
+                id="blogs"
+            >
+                <div className="waves">
+                    <div className="wave" id="wave1" />
+                    <div className="wave" id="wave2" />
+                    <div className="wave" id="wave3" />
+                    <div className="wave" id="wave4" />
+                </div>
+
                 <div className="container">
                     <h1 className="heading">
                         our

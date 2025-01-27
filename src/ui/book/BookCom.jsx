@@ -1,10 +1,20 @@
+// style
+import "./BookCom.scss";
+
 // assets
 import bookimage from "../../assets/images/book/book-img.svg";
 
 function BookCom() {
     return (
         <>
-            <section className="book" id="book">
+            <section className="book book-home" id="book">
+                <div className="waves">
+                    <div className="wave" id="wave1" />
+                    <div className="wave" id="wave2" />
+                    <div className="wave" id="wave3" />
+                    <div className="wave" id="wave4" />
+                </div>
+
                 <div className="container">
                     <h1 className="heading">
                         <span>book</span>

@@ -103,6 +103,8 @@ import Book from "../pages/app/book/Book";
 import Blogs from "../pages/app/blogs/Blogs";
 import Blog from "../ui/blogs/Blog";
 import VerifyAccount from "../pages/user/auth/verifyaccount/VerifyAccount";
+import ChangePassword from "../pages/user/auth/changepassword/ChangePassword";
+import ConfirmResetPassword from "../pages/user/auth/confirmresetpassword/ConfirmResetPassword";
 // import ProtectedRouteAdmin from "../components/auth/ProtectedRouteAdmin";
 // import AppLayoutAdmin from "../components/layouts/AppLayoutAdmin";
 // import AppAdmin from "../pages/admin/AppAdmin";
@@ -560,6 +562,12 @@ function Router() {
                             <Route path="/sign/in" element={<Login />} />
                             <Route path="/sign-in" element={<Login />} />
 
+                            {/* change password */}
+                            <Route
+                                path="/changepassword"
+                                element={<ChangePassword />}
+                            />
+
                             {/*  */}
                             {/* <Route
                                 path="/social/complete/:provider"
@@ -624,6 +632,12 @@ function Router() {
                             <Route
                                 path="/reset-password"
                                 element={<ResetPassword />}
+                            />
+
+                            {/* confirm reset password */}
+                            <Route
+                                path="/confirmresetpassword"
+                                element={<ConfirmResetPassword />}
                             />
 
                             {/*  */}
