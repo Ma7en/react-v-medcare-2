@@ -105,6 +105,7 @@ import Blog from "../ui/blogs/Blog";
 import VerifyAccount from "../pages/user/auth/verifyaccount/VerifyAccount";
 import ChangePassword from "../pages/user/auth/changepassword/ChangePassword";
 import ConfirmResetPassword from "../pages/user/auth/confirmresetpassword/ConfirmResetPassword";
+import PageNotFound from "../pages/error/PageNotFound";
 // import ProtectedRouteAdmin from "../components/auth/ProtectedRouteAdmin";
 // import AppLayoutAdmin from "../components/layouts/AppLayoutAdmin";
 // import AppAdmin from "../pages/admin/AppAdmin";
@@ -496,7 +497,7 @@ function Router() {
 
                             {/* ===================================================================================== */}
                             {/* Verify user | patient */}
-                            {/* signup user | patient */}
+                            {/* signup */}
                             <Route path="/signup" element={<Signup />} />
                             <Route path="/register" element={<Signup />} />
                             <Route
@@ -650,54 +651,55 @@ function Router() {
 
                         {/* ======================================================================== */}
                         {/* NotFound or 404 Error pages */}
-                        {/* <Route
+                        <Route
                             path="/notfoundpage"
-                            element={<NotFoundPage />}
+                            element={<PageNotFound />}
                         />
                         <Route
                             path="/not/foundpage"
-                            element={<NotFoundPage />}
+                            element={<PageNotFound />}
                         />
                         <Route
                             path="/not-foundpage"
-                            element={<NotFoundPage />}
+                            element={<PageNotFound />}
                         />
                         <Route
                             path="/notfound/page"
-                            element={<NotFoundPage />}
+                            element={<PageNotFound />}
                         />
                         <Route
                             path="/notfound-page"
-                            element={<NotFoundPage />}
+                            element={<PageNotFound />}
                         />
                         <Route
                             path="/not/found-page"
-                            element={<NotFoundPage />}
+                            element={<PageNotFound />}
                         />
                         <Route
                             path="/not-found/page"
-                            element={<NotFoundPage />}
+                            element={<PageNotFound />}
                         />
                         <Route
                             path="/not/found/page"
-                            element={<NotFoundPage />}
+                            element={<PageNotFound />}
                         />
                         <Route
                             path="/not-found-page"
-                            element={<NotFoundPage />}
+                            element={<PageNotFound />}
                         />
-                        <Route path="/notfound" element={<NotFoundPage />} />
-                        <Route path="/not/found" element={<NotFoundPage />} />
-                        <Route path="/not-found" element={<NotFoundPage />} />
-                        <Route path="/error" element={<NotFoundPage />} />
-                        <Route path="/404" element={<NotFoundPage />} />
-                        <Route path="/error404" element={<NotFoundPage />} />
-                        <Route path="/error-404" element={<NotFoundPage />} />
-                        <Route path="/error/404" element={<NotFoundPage />} />
-                        <Route path="/400error" element={<NotFoundPage />} />
-                        <Route path="/404-error" element={<NotFoundPage />} />
-                        <Route path="/404/error" element={<NotFoundPage />} />
-                        <Route path="*" element={<NotFoundPage />} /> */}
+                        <Route path="/notfound" element={<PageNotFound />} />
+                        <Route path="/not/found" element={<PageNotFound />} />
+                        <Route path="/not-found" element={<PageNotFound />} />
+                        <Route path="/error" element={<PageNotFound />} />
+                        <Route path="/errors" element={<PageNotFound />} />
+                        <Route path="/404" element={<PageNotFound />} />
+                        <Route path="/error404" element={<PageNotFound />} />
+                        <Route path="/error-404" element={<PageNotFound />} />
+                        <Route path="/error/404" element={<PageNotFound />} />
+                        <Route path="/400error" element={<PageNotFound />} />
+                        <Route path="/404-error" element={<PageNotFound />} />
+                        <Route path="/404/error" element={<PageNotFound />} />
+                        <Route path="*" element={<PageNotFound />} />
                     </Routes>
                 </BrowserRouter>
             </Suspense>

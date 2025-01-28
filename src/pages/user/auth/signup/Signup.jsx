@@ -15,28 +15,30 @@ export default function Signup() {
     return (
         <>
             <Main type="loginpage" className="loginpage">
-                <div className="container">
-                    <section>
-                        <Heading as="h3">Signup to your account</Heading>
+                <div className="signup">
+                    <div className="container">
+                        <section>
+                            <Heading as="h3">Signup to your account</Heading>
 
-                        <SignupForm sign="true" />
+                            <SignupForm sign="true" />
 
-                        <DivForm>
-                            <Button
-                                size="large"
-                                onClick={() => navigate("/resetpassword")}
-                            >
-                                Reset password
-                            </Button>
+                            <DivForm>
+                                <Button
+                                    size="large"
+                                    onClick={() => navigate("/resetpassword")}
+                                >
+                                    Reset password
+                                </Button>
 
-                            <Button
-                                size="large"
-                                onClick={() => navigate("/login")}
-                            >
-                                Login
-                            </Button>
-                        </DivForm>
-                    </section>
+                                <Button
+                                    size="large"
+                                    onClick={() => navigate("/login")}
+                                >
+                                    Login
+                                </Button>
+                            </DivForm>
+                        </section>
+                    </div>
                 </div>
             </Main>
         </>

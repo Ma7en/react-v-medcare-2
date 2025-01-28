@@ -15,29 +15,30 @@ export default function VerifyAccount() {
     return (
         <>
             <Main type="loginpage" className="loginpage">
-                <div className="container">
-                    <section>
-                        <Heading as="h3">Verify Account</Heading>
+                <div className="verifyaccount">
+                    <div className="container">
+                        <section>
+                            <Heading as="h3">Verify Account</Heading>
 
-                        <VerifyAccountForm />
+                            <VerifyAccountForm />
 
-                        <DivForm>
-                            <Button
-                                size="large"
-                                onClick={() => navigate("/login")}
-                            >
-                                Login
-                            </Button>
+                            <DivForm>
+                                <Button
+                                    size="large"
+                                    onClick={() => navigate("/login")}
+                                >
+                                    Login
+                                </Button>
 
-                            <Button
-                                size="large"
-                                onClick={() => navigate("/signup")}
-                            >
-                                SignUp
-                            </Button>
-                        </DivForm>
+                                <Button
+                                    size="large"
+                                    onClick={() => navigate("/signup")}
+                                >
+                                    SignUp
+                                </Button>
+                            </DivForm>
 
-                        {/* <form className="form" onSubmit={handleSubmite}>
+                            {/* <form className="form" onSubmit={handleSubmite}>
                             <div className="row">
                                 <label htmlFor="email">Email address</label>
                                 <input
@@ -64,7 +65,8 @@ export default function VerifyAccount() {
                                 <Button type="primary">Login</Button>
                             </div>
                         </form> */}
-                    </section>
+                        </section>
+                    </div>
                 </div>
             </Main>
         </>

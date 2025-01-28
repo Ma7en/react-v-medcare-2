@@ -1,5 +1,8 @@
-import Header from "../../ui/header/Header";
+// components
 import NotFoundCom from "../../ui/error/NotFoundCom";
+
+// ui
+import Header from "../../ui/header/Header";
 import Footer from "../../ui/footer/Footer";
 
 export default function PageNotFound() {

@@ -1,10 +1,11 @@
+/* eslint-disable react/no-unescaped-entities */
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { HiEye, HiEyeSlash } from "react-icons/hi2";
 
 // services
-import { userChangePassword } from "../../../../services/auth/user/authUser";
+import { userConfirmResetPassword } from "../../../../services/auth/user/authUser";
 
 // plugins
 import Toast from "../../../../plugin/Toast";
@@ -30,32 +31,26 @@ function ConfirmResetPasswordForm() {
     const { register, formState, getValues, handleSubmit, reset } = useForm();
     const { errors } = formState;
 
-    const handleSignUp = async ({ otp, password, confirm_password }) => {
+    const handleConfirmResetPassword = async ({
+        otp,
+        new_password,
+        confirm_password,
+    }) => {
         try {
             if (errors.root) {
                 return;
             }
 
-            const { data, error } = await userChangePassword(
+            const { data, error } = await userConfirmResetPassword(
                 otp,
-                password,
+                new_password,
                 confirm_password
             );
 
             if (error) {
                 if (error?.message && typeof error.message === "string") {
-                    Toast("error", `${error?.message || "Invalid token"}.`);
-                    setIsLoading(false);
-                }
-                if (error?.message?.password) {
-                    Toast(
-                        "error",
-                        `${
-                            error?.message?.password ||
-                            "Old password is incorrect"
-                        }.`
-                    );
-                    setErrorsMessage(error?.message?.password);
+                    Toast("error", `${error?.message || "Invalid OTP."}.`);
+                    setErrorsMessage(error?.message);
                     setIsLoading(false);
                 }
             } else {
@@ -70,11 +65,12 @@ function ConfirmResetPasswordForm() {
             console.log(`Error: ${error}`);
         }
     };
+
     return (
         <>
-            <Form onSubmit={handleSubmit(handleSignUp)}>
+            <Form onSubmit={handleSubmit(handleConfirmResetPassword)}>
                 <FormRowVertical
-                    label="OTP Code"
+                    label="OTP Code (6 characters)"
                     error={errors?.otp?.message || errorsMessage}
                 >
                     <Input
@@ -95,6 +91,19 @@ function ConfirmResetPasswordForm() {
                     />
                 </FormRowVertical>
 
+                <div className="resend">
+                    <p>
+                        Don't get the Code?
+                        <a
+                            onClick={() => {
+                                navigate(`/resetpassword`);
+                            }}
+                        >
+                            Resend
+                        </a>
+                    </p>
+                </div>
+
                 <FormRowPass
                     label="New Password (min 8 characters)"
                     error={errors?.new_password?.message}
@@ -110,7 +119,7 @@ function ConfirmResetPasswordForm() {
                                 value: 8,
                                 message: `Password needs a minimum of 8 characters`,
                             },
-                            value: "Mazen@@1",
+                            // value: "Mazen@@1",
                         })}
                         autoComplete="off"
                         required
@@ -148,7 +157,7 @@ function ConfirmResetPasswordForm() {
                             validate: (value) =>
                                 value === getValues()?.new_password ||
                                 `Passwords need to match`,
-                            value: "Mazen@@1",
+                            // value: "Mazen@@1",
                         })}
                         autoComplete="off"
                         required

@@ -15,32 +15,34 @@ export default function Login() {
     return (
         <>
             <Main type="loginpage" className="loginpage">
-                <div className="container">
-                    <section>
-                        <Heading as="h3">Log in to your account</Heading>
+                <div className="login">
+                    <div className="container">
+                        <section>
+                            <Heading as="h3">Log in to your account</Heading>
 
-                        <LoginForm sign="true" />
+                            <LoginForm sign="true" />
 
-                        <DivForm>
-                            <Button
-                                size="large"
-                                onClick={() => {
-                                    navigate("/resetpassword");
-                                }}
-                            >
-                                Reset password
-                            </Button>
+                            <DivForm>
+                                <Button
+                                    size="large"
+                                    onClick={() => {
+                                        navigate("/resetpassword");
+                                    }}
+                                >
+                                    Reset password
+                                </Button>
 
-                            <Button
-                                size="large"
-                                onClick={() => {
-                                    navigate("/signup");
-                                }}
-                            >
-                                SignUp
-                            </Button>
-                        </DivForm>
-                    </section>
+                                <Button
+                                    size="large"
+                                    onClick={() => {
+                                        navigate("/signup");
+                                    }}
+                                >
+                                    SignUp
+                                </Button>
+                            </DivForm>
+                        </section>
+                    </div>
                 </div>
             </Main>
         </>

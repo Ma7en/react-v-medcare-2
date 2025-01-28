@@ -1,3 +1,6 @@
+// style
+import "./ConfirmResetPassword.scss";
+
 // components
 import ConfirmResetPasswordForm from "./ConfirmResetPasswordForm";
 
@@ -9,12 +12,14 @@ function ConfirmResetPassword() {
     return (
         <>
             <Main type="loginpage" className="loginpage">
-                <div className="container">
-                    <section>
-                        <Heading as="h3">Confirm Reset Password</Heading>
+                <div className="confirmresetpassword">
+                    <div className="container">
+                        <section>
+                            <Heading as="h3">Confirm Reset Password</Heading>
 
-                        <ConfirmResetPasswordForm />
-                    </section>
+                            <ConfirmResetPasswordForm />
+                        </section>
+                    </div>
                 </div>
             </Main>
         </>

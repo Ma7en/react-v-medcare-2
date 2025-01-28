@@ -22,7 +22,11 @@ function AppHeaderMenu() {
         <>
             <StyledHeaderMenu>
                 <li>
-                    <ButtonIcon onClick={() => navigate(`${App_Url}/account`)}>
+                    <ButtonIcon
+                        onClick={() => {
+                            navigate(`${App_Url}/account`);
+                        }}
+                    >
                         <HiOutlineUser />
                     </ButtonIcon>
                 </li>

@@ -38,6 +38,7 @@ function ContactForm({ sign }) {
         password,
         passwordConfirm,
     }) => {
+        return;
         // try {
         //     // console.log(`errors`, typeof errors.root);
         //     if (errors.root) {
@@ -159,7 +160,7 @@ function ContactForm({ sign }) {
 
                 <FormRow>
                     <Button type="submit" disabled={isLoading}>
-                        {isLoading ? <SpinnerMini /> : `Submit`}
+                        {isLoading ? <SpinnerMini /> : `Contact`}
                     </Button>
                 </FormRow>
             </Form>

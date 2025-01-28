@@ -54,13 +54,12 @@ function VerifyAccountForm() {
                     setIsLoading(false);
                 }
             } else {
-                navigate(`/login`);
-                // localStorage.removeItem("userData");
                 setIsLoading(true);
                 Toast(
                     "success",
-                    `${data?.message || "Account verified successfully"}`
+                    `${data?.message || "Account Verified Successfully."}`
                 );
+                navigate(`/login`);
             }
         } catch (error) {
             console.log(`Error: ${error}`);
@@ -154,8 +153,6 @@ function VerifyAccountForm() {
                         })}
                         autoComplete="off"
                         required
-                        // value={email}
-                        // onChange={(e) => setEmail(e.target.value)}
                         disabled={isLoading}
                     />
                 </FormRowVertical>

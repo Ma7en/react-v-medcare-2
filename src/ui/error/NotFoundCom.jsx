@@ -1,8 +1,13 @@
 import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
+
+// ui
 import BackButton from "../global/BackButton";
 import Button from "../global/Button";
 import Heading from "../global/Heading";
-import styled from "styled-components";
+
+// assets
+import imagenotfound from "../../assets/images/error/doctor-woman-400px-2.png";
 
 const StyledBtns = styled.div`
     display: flex;
@@ -24,15 +29,20 @@ function NotFoundCom() {
                             <StyledBtns>
                                 <BackButton />
 
-                                <Button onClick={() => navigate("/home")}>
+                                <Button
+                                    onClick={() => {
+                                        navigate("/home");
+                                    }}
+                                >
                                     Back Home
                                 </Button>
                             </StyledBtns>
                         </div>
+
                         <div>
                             <img
-                                src="/public/images/error/doctor-woman-400px-2.png"
-                                alt=""
+                                src={`${imagenotfound}`}
+                                alt={`page not found`}
                             />
                         </div>
                     </section>

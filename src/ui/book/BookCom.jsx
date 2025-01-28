@@ -3,6 +3,7 @@ import "./BookCom.scss";
 
 // assets
 import bookimage from "../../assets/images/book/book-img.svg";
+import BookForm from "./BookForm";
 
 function BookCom() {
     return (
@@ -26,7 +27,9 @@ function BookCom() {
                             <img src={bookimage} alt={`book img`} />
                         </div>
 
-                        <form action="#">
+                        <BookForm />
+
+                        {/* <form action="#">
                             <h3>book appointment</h3>
                             <input
                                 type="text"
@@ -67,7 +70,7 @@ function BookCom() {
                                 defaultValue="book now"
                                 className="btn"
                             />
-                        </form>
+                        </form> */}
                     </div>
                 </div>
             </section>

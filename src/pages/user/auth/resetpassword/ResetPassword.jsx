@@ -15,34 +15,36 @@ export default function ResetPassword() {
     return (
         <>
             <Main type="loginpage" className="loginpage">
-                <div className="container">
-                    <section>
-                        <Heading as="h3">
-                            Reset Password to your account
-                        </Heading>
+                <div className="resetpassword">
+                    <div className="container">
+                        <section>
+                            <Heading as="h3">
+                                Reset Password to your account
+                            </Heading>
 
-                        <ResetPasswordForm />
+                            <ResetPasswordForm />
 
-                        <DivForm>
-                            <Button
-                                size="large"
-                                onClick={() => {
-                                    navigate("/login");
-                                }}
-                            >
-                                Login
-                            </Button>
+                            <DivForm>
+                                <Button
+                                    size="large"
+                                    onClick={() => {
+                                        navigate("/login");
+                                    }}
+                                >
+                                    Login
+                                </Button>
 
-                            <Button
-                                size="large"
-                                onClick={() => {
-                                    navigate("/signup");
-                                }}
-                            >
-                                SignUp
-                            </Button>
-                        </DivForm>
-                    </section>
+                                <Button
+                                    size="large"
+                                    onClick={() => {
+                                        navigate("/signup");
+                                    }}
+                                >
+                                    SignUp
+                                </Button>
+                            </DivForm>
+                        </section>
+                    </div>
                 </div>
             </Main>
         </>

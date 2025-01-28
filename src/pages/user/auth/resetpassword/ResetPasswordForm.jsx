@@ -50,6 +50,10 @@ function ResetPasswordForm() {
                     "success",
                     `${data?.message || "OTP has been sent to your email."}`
                 );
+                localStorage.setItem(
+                    "userData",
+                    JSON.stringify({ email: email })
+                );
                 navigate(`/confirmresetpassword`);
             }
         } catch (error) {
@@ -78,8 +82,6 @@ function ResetPasswordForm() {
                         autoComplete="off"
                         disabled={isLoading}
                         required
-                        // value={email}
-                        // onChange={(e) => setEmail(e.target.value)}
                     />
                 </FormRowVertical>
 

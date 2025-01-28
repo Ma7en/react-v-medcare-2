@@ -103,7 +103,7 @@ function SignupForm({ sign }) {
                         disabled={isLoading}
                         {...registerForm("first_name", {
                             required: `This field is required`,
-                            value: "mazen",
+                            // value: "mazen",
                         })}
                         autoComplete="off"
                         required
@@ -121,7 +121,7 @@ function SignupForm({ sign }) {
                         disabled={isLoading}
                         {...registerForm("last_name", {
                             required: `This field is required`,
-                            value: "saad",
+                            // value: "saad",
                         })}
                         autoComplete="off"
                         required
@@ -143,7 +143,7 @@ function SignupForm({ sign }) {
                                 value: /\S+@\S+\.\S+/,
                                 message: `Please Provide a valid email address`,
                             },
-                            value: "p030@gmail.com",
+                            // value: "p030@gmail.com",
                         })}
                         // Email regex: /\S+@\S+\.\S+/
                         autoComplete="off"
@@ -167,7 +167,7 @@ function SignupForm({ sign }) {
                                 value: 8,
                                 message: `Password needs a minimum of 8 characters`,
                             },
-                            value: "Mazen@@1",
+                            // value: "Mazen@@1",
                         })}
                         autoComplete="off"
                         required
@@ -206,7 +206,7 @@ function SignupForm({ sign }) {
                             validate: (value) =>
                                 value === getValues()?.password ||
                                 `Passwords need to match`,
-                            value: "Mazen@@1",
+                            // value: "Mazen@@1",
                         })}
                         autoComplete="off"
                         required

@@ -300,6 +300,50 @@ export const userResetPassword = async (email) => {
     }
 };
 
+// Function to handle user change password
+export const userConfirmResetPassword = async (otp, password, password2) => {
+    try {
+        // Making a POST request to register a new user
+        const { data } = await axios.post(
+            "auth/patient/confirm-reset-password/",
+            {
+                otp,
+                password,
+                password2,
+            }
+        );
+
+        // console.log(`ee`, data);
+
+        // Logging in the newly registered user and displaying success toast
+        // await login(email, password);
+
+        // Displaying a success toast notification
+        Toast.fire({
+            icon: "success",
+            title: "Confirm Reset Password Successfully.",
+        });
+
+        // console.log(`userRegister`, { data, error: null }); // email: "m3@gmail.com"full_name: "Mazen Saad"
+
+        if (data) {
+            let userData = localStorage.setItem(
+                "userData",
+                JSON.stringify(data?.data)
+            );
+        }
+
+        // Returning data and error information
+        return { data, error: null };
+    } catch (error) {
+        // Handling errors and returning data and error information
+        return {
+            data: null,
+            error: error?.response?.data || "Something went wrong",
+        };
+    }
+};
+
 // =================================================================
 // Function to handle user logout
 export const logout = () => {
