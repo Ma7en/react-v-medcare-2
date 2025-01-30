@@ -1,7 +1,11 @@
 import styled from "styled-components";
-import { useUser } from "../../features/authentication/useUser";
+
+// import { useUser } from "../../features/authentication/useUser";
 
 // import { useUser } from "./useUser";
+
+// assets
+import avataruser from "../../assets/images/user/default-user.jpg";
 
 const StyledAppUserAvatar = styled.div`
     display: flex;
@@ -24,8 +28,10 @@ const Avatar = styled.img`
 `;
 
 function AppUserAvatar() {
-    const { user } = useUser();
-    const { fullName, avatar } = user.user_metadata;
+    // const { user } = useUser();
+    // const { user } = useUser();
+    // const { fullName, avatar } = user.user_metadata;
+    const { fullName, avatar } = { fullName: "x", avatar: avataruser };
 
     return (
         <>

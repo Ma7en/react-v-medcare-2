@@ -104,6 +104,29 @@ export const userRegister = async (
     }
 };
 
+// Function to handle user profile id
+export const userProfileID = async (id) => {
+    try {
+        // Making a POST request to register a new user
+        const { data } = await axios.get(`auth/patient/profile/${id}/`);
+
+        // Displaying a success toast notification
+        Toast.fire({
+            icon: "success",
+            title: "Paitent Profile retrieved successfully.",
+        });
+
+        // Returning data and error information
+        return { data, error: null };
+    } catch (error) {
+        // Handling errors and returning data and error information
+        return {
+            data: null,
+            error: error?.response?.data || "Something went wrong",
+        };
+    }
+};
+
 // Function to handle verification account
 export const userVerifyAccount = async (otp_code) => {
     try {
@@ -171,7 +194,16 @@ export const userLogin = async (email, password) => {
 
         if (status === 200 || data?.code === 0) {
             let userData = JSON.stringify(data?.data);
-            setAuthUser(userData, data?.access_token, data?.refresh_token);
+
+            let userProfile = await userProfileID(data?.data?.id);
+            let userDataProfile = JSON.stringify(userProfile?.data?.data);
+
+            setAuthUser(
+                userData,
+                userDataProfile,
+                data?.access_token,
+                data?.refresh_token
+            );
         }
 
         // Returning data and error information
@@ -186,9 +218,19 @@ export const userLogin = async (email, password) => {
 };
 
 // Function to set the authenticated user and update user state
-export const setAuthUser = (data, access_token, refresh_token) => {
+export const setAuthUser = (
+    data,
+    userDataProfile,
+    access_token,
+    refresh_token
+) => {
     // Setting access and refresh tokens in cookies with expiration dates
     Cookies.set("userData", data, {
+        expires: 7, // Refresh token expires in 7 days
+        secure: true,
+    });
+
+    Cookies.set("userProfile", userDataProfile, {
         expires: 7, // Refresh token expires in 7 days
         secure: true,
     });
@@ -270,6 +312,41 @@ export const userChangePassword = async (
             icon: "success",
             title: "Change Password Successfully.",
         });
+
+        // Returning data and error information
+        return { data, error: null };
+    } catch (error) {
+        // Handling errors and returning data and error information
+        return {
+            data: null,
+            error: error?.response?.data || "Something went wrong",
+        };
+    }
+};
+
+// Function to handle user logout
+export const userRemoveData = () => {
+    // Removing access and refresh tokens from cookies, resetting user state, and displaying success toast
+    localStorage.removeItem("userData");
+    Cookies.remove("access_token");
+    Cookies.remove("refresh_token");
+    Cookies.remove("userData");
+    Cookies.remove("userProfile");
+};
+export const userLogout = async (refresh_token) => {
+    try {
+        // Making a POST request to logout
+        const { data } = await axios.post("auth/patient/logout/", {
+            refresh_token,
+        });
+
+        // Displaying a success toast notification
+        Toast.fire({
+            icon: "success",
+            title: "Logout Successfully.",
+        });
+
+        userRemoveData();
 
         // Returning data and error information
         return { data, error: null };

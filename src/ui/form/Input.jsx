@@ -14,6 +14,8 @@ const Input = styled.input`
     text-transform: none;
     font-size: 2rem;
 
+    width: 100%;
+
     &:focus,
     &:active,
     &:hover,

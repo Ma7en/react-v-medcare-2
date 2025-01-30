@@ -5,19 +5,27 @@ import {
     HiBriefcase,
     HiChartBar,
     HiChatBubbleLeftEllipsis,
+    HiChevronDown,
+    HiChevronUp,
     HiCube,
     HiMiniBookOpen,
     HiOutlineHome,
 } from "react-icons/hi2";
 import { FaAmbulance, FaNotesMedical, FaUserMd } from "react-icons/fa";
 
+// utils
 import { App_Url } from "../../utils/constants";
-import { useAppMenu } from "../../contexts/AppMenuContext";
+
+// context
+import { useAppMenuUser } from "../../contexts/AppMenuContextUser";
 
 const StyledNav = styled.nav`
+    user-select: none;
+
     ul {
         ul {
-            padding-left: 2rem;
+            padding-left: 1.6rem;
+            margin-top: 10px;
         }
     }
 `;
@@ -62,6 +70,7 @@ const StyledNavLink = styled(NavLink)`
         border-radius: var(--border-radius-md);
         box-shadow: var(--box-shadow);
     }
+
     &.com {
         flex-direction: column;
         justify-content: flex-start;
@@ -88,6 +97,75 @@ const StyledNavLink = styled(NavLink)`
     }
 `;
 
+const StyledNavList = styled.div`
+    cursor: pointer;
+    &:link,
+    &:visited {
+        display: flex;
+        align-items: center;
+        gap: 1.2rem;
+
+        color: var(--color-grey-600);
+        font-size: 1.6rem;
+        font-weight: 500;
+        padding: 1.2rem 2.4rem;
+        padding-left: 0.4rem;
+        transition: all 0.3s;
+
+        border: var(--border);
+        border-color: transparent;
+    }
+
+    /* This works because react-router places the active class on the active NavLink */
+    /* color: var(--color-grey-800); */
+    /* &:hover,
+    &:active,
+    &.active:link,
+    &.active:visited {
+        color: var(--green);
+        background-color: var(--color-grey-50);
+        border-radius: var(--border-radius-sm);
+
+        background-color: var(--back-box);
+        border: var(--border);
+        border-radius: var(--border-radius-md);
+        box-shadow: var(--box-shadow);
+    } */
+
+    &.com {
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+
+        div {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            padding-left: 0.6rem;
+        }
+    }
+
+    & svg {
+        width: 2.4rem;
+        height: 2.4rem;
+        color: var(--color-grey-400);
+        transition: all 0.3s;
+    }
+
+    div {
+        svg:last-child {
+            margin-left: auto;
+        }
+    }
+
+    /* &:hover svg,
+    &:active svg,
+    &.active:link svg,
+    &.active:visited svg {
+        color: var(--color-brand-600);
+    } */
+`;
+
 const NavListChild = styled.ul`
     display: flex;
     flex-direction: column;
@@ -95,7 +173,7 @@ const NavListChild = styled.ul`
 `;
 
 function AppMainNav() {
-    const { setNavMenu } = useAppMenu();
+    const { setNavMenu, navMenuChild, setNavMenuChild } = useAppMenuUser();
 
     return (
         <>
@@ -104,7 +182,9 @@ function AppMainNav() {
                     <li>
                         <StyledNavLink
                             to={`${App_Url}/home`}
-                            onClick={() => setNavMenu(false)}
+                            onClick={() => {
+                                setNavMenu(false);
+                            }}
                         >
                             <HiOutlineHome />
                             <span>Home</span>
@@ -114,7 +194,9 @@ function AppMainNav() {
                     <li>
                         <StyledNavLink
                             to={`${App_Url}/services`}
-                            onClick={() => setNavMenu(false)}
+                            onClick={() => {
+                                setNavMenu(false);
+                            }}
                         >
                             <FaAmbulance />
                             <span>services</span>
@@ -124,7 +206,9 @@ function AppMainNav() {
                     <li>
                         <StyledNavLink
                             to={`${App_Url}/book`}
-                            onClick={() => setNavMenu(false)}
+                            onClick={() => {
+                                setNavMenu(false);
+                            }}
                         >
                             <FaNotesMedical />
                             <span>book</span>
@@ -134,7 +218,9 @@ function AppMainNav() {
                     <li>
                         <StyledNavLink
                             to={`${App_Url}/blogs`}
-                            onClick={() => setNavMenu(false)}
+                            onClick={() => {
+                                setNavMenu(false);
+                            }}
                         >
                             <HiMiniBookOpen />
                             <span>Blogs</span>
@@ -142,68 +228,87 @@ function AppMainNav() {
                     </li>
 
                     <li>
-                        <StyledNavLink
-                            to={`${App_Url}/components`}
-                            className={`com`}
-                            onClick={() => setNavMenu(false)}
-                        >
-                            <div>
+                        <StyledNavList className="com">
+                            <div
+                                onClick={() => {
+                                    setNavMenuChild(!navMenuChild);
+                                }}
+                            >
                                 <HiCube />
                                 <span>components</span>
+                                {navMenuChild ? (
+                                    <HiChevronUp />
+                                ) : (
+                                    <HiChevronDown />
+                                )}
                             </div>
 
-                            <NavListChild>
-                                <li>
-                                    <StyledNavLink
-                                        to={`${App_Url}/landing`}
-                                        onClick={() => setNavMenu(false)}
-                                    >
-                                        <HiArrowPath />
-                                        <span>Landing</span>
-                                    </StyledNavLink>
-                                </li>
+                            {navMenuChild ? (
+                                <NavListChild>
+                                    <li>
+                                        <StyledNavLink
+                                            to={`${App_Url}/landing`}
+                                            onClick={() => {
+                                                setNavMenu(false);
+                                            }}
+                                        >
+                                            <HiArrowPath />
+                                            <span>Landing</span>
+                                        </StyledNavLink>
+                                    </li>
 
-                                <li>
-                                    <StyledNavLink
-                                        to={`${App_Url}/iconsnumber`}
-                                        onClick={() => setNavMenu(false)}
-                                    >
-                                        <HiChartBar />
-                                        <span>iconsNumber</span>
-                                    </StyledNavLink>
-                                </li>
+                                    <li>
+                                        <StyledNavLink
+                                            to={`${App_Url}/iconsnumber`}
+                                            onClick={() => {
+                                                setNavMenu(false);
+                                            }}
+                                        >
+                                            <HiChartBar />
+                                            <span>iconsNumber</span>
+                                        </StyledNavLink>
+                                    </li>
 
-                                <li>
-                                    <StyledNavLink
-                                        to={`${App_Url}/aboutus`}
-                                        onClick={() => setNavMenu(false)}
-                                    >
-                                        <HiBriefcase />
-                                        <span>aboutus</span>
-                                    </StyledNavLink>
-                                </li>
+                                    <li>
+                                        <StyledNavLink
+                                            to={`${App_Url}/aboutus`}
+                                            onClick={() => {
+                                                setNavMenu(false);
+                                            }}
+                                        >
+                                            <HiBriefcase />
+                                            <span>aboutus</span>
+                                        </StyledNavLink>
+                                    </li>
 
-                                <li>
-                                    <StyledNavLink
-                                        to={`${App_Url}/doctors`}
-                                        onClick={() => setNavMenu(false)}
-                                    >
-                                        <FaUserMd />
-                                        <span>doctors</span>
-                                    </StyledNavLink>
-                                </li>
+                                    <li>
+                                        <StyledNavLink
+                                            to={`${App_Url}/doctors`}
+                                            onClick={() => {
+                                                setNavMenu(false);
+                                            }}
+                                        >
+                                            <FaUserMd />
+                                            <span>doctors</span>
+                                        </StyledNavLink>
+                                    </li>
 
-                                <li>
-                                    <StyledNavLink
-                                        to={`${App_Url}/reviews`}
-                                        onClick={() => setNavMenu(false)}
-                                    >
-                                        <HiChatBubbleLeftEllipsis />
-                                        <span>reviews</span>
-                                    </StyledNavLink>
-                                </li>
-                            </NavListChild>
-                        </StyledNavLink>
+                                    <li>
+                                        <StyledNavLink
+                                            to={`${App_Url}/reviews`}
+                                            onClick={() => {
+                                                setNavMenu(false);
+                                            }}
+                                        >
+                                            <HiChatBubbleLeftEllipsis />
+                                            <span>reviews</span>
+                                        </StyledNavLink>
+                                    </li>
+                                </NavListChild>
+                            ) : (
+                                ""
+                            )}
+                        </StyledNavList>
                     </li>
                 </NavList>
             </StyledNav>

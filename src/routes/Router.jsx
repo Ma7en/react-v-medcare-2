@@ -236,7 +236,7 @@ function Router() {
                                 path={`/${App_User}/profile`}
                                 element={<AppUser />}
                             />
-                            {/* <Route
+                            <Route
                                 path={`/${App_User}/${App_User}/profile`}
                                 element={<AppUser />}
                             />
@@ -281,6 +281,7 @@ function Router() {
                                 element={<AppUser />}
                             />
 
+                            {/* 
                             <Route
                                 path={`/${App_User}/updateprofile/:id`}
                                 element={<UpdateProfile />}

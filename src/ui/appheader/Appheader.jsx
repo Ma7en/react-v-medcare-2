@@ -1,5 +1,7 @@
 import styled from "styled-components";
-import AppUserAvatar from "./AppUserAvatar";
+
+// ui
+// import AppUserAvatar from "./AppUserAvatar";
 import AppHeaderMenu from "./AppHeaderMenu";
 import AppMenuSidebar from "../appsidebar/AppMenuSidebar";
 // import UserAvatar from "../features/authentication/UserAvatar";
@@ -22,7 +24,7 @@ const Appheader = () => {
             <StyledHeader>
                 <AppMenuSidebar />
 
-                <AppUserAvatar />
+                {/* <AppUserAvatar /> */}
                 <AppHeaderMenu />
             </StyledHeader>
         </>

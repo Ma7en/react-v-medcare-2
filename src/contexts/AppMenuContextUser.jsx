@@ -4,8 +4,9 @@ import { createContext, useEffect, useState } from "react";
 
 const AppMenuContext = createContext();
 
-function AppMenuProvider({ children }) {
+function AppMenuProviderUser({ children }) {
     const [navMenu, setNavMenu] = useState(false);
+    const [navMenuChild, setNavMenuChild] = useState(true);
 
     // useEffect(() => {
     //     window.addEventListener("scroll", () => {
@@ -20,13 +21,15 @@ function AppMenuProvider({ children }) {
     }, []);
 
     return (
-        <AppMenuContext.Provider value={{ navMenu, setNavMenu }}>
+        <AppMenuContext.Provider
+            value={{ navMenu, setNavMenu, navMenuChild, setNavMenuChild }}
+        >
             {children}
         </AppMenuContext.Provider>
     );
 }
 
-function useAppMenu() {
+function useAppMenuUser() {
     const context = useContext(AppMenuContext);
     if (context === undefined)
         throw new Error(`AppMenuContext was used outside of AppMenuProvider`);
@@ -34,4 +37,4 @@ function useAppMenu() {
     return context;
 }
 
-export { AppMenuProvider, useAppMenu };
+export { AppMenuProviderUser, useAppMenuUser };

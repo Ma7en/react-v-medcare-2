@@ -1,13 +1,19 @@
 /* eslint-disable no-unused-vars */
 import styled from "styled-components";
+
+// context
+import { useAppMenuUser } from "../../contexts/AppMenuContextUser";
+
+// ui
+import AppMenuSidebar from "./AppMenuSidebar";
+
+// ui
 import AppMainNav from "./AppMainNav";
 import Logo from "../header/Logo";
-import AppMenuSidebar from "./AppMenuSidebar";
-import { useAppMenu } from "../../contexts/AppMenuContext";
 
 const StyledSidebar = styled.aside`
     background-color: var(--back-sec-2);
-    padding: 3.2rem 2.4rem;
+    padding: 3.2rem 1.4rem;
     border-right: 1px solid var(--color-grey-100);
     grid-row: 1/-1;
     display: flex;
@@ -49,7 +55,7 @@ const StyledAppFooter = styled.footer`
 `;
 
 function AppSidebar() {
-    const { navMenu } = useAppMenu();
+    const { navMenu } = useAppMenuUser();
 
     return (
         <>

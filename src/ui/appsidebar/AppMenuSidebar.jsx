@@ -1,7 +1,9 @@
 // import { useEffect } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 import styled from "styled-components";
-import { useAppMenu } from "../../contexts/AppMenuContext";
+
+// context
+import { useAppMenuUser } from "../../contexts/AppMenuContextUser";
 
 const StyledMenuFaBars = styled(FaBars)`
     font-size: 3.5rem;
@@ -61,15 +63,22 @@ const StyledMenuFaTimes = styled(FaTimes)`
     -moz-transition: var(--main-transition);
     -ms-transition: var(--main-transition);
     -o-transition: var(--main-transition);
+
     @media (max-width: 767px) {
         // display: initial;
         display: flex;
         transition: var(--main-transition);
+
         &.times {
             animation-name: time;
             animation-duration: 0.5s;
             left: 28rem;
+
+            &:hover {
+                border-radius: 50%;
+            }
         }
+
         @keyframes time {
             from {
                 /* background-color: red; */
@@ -90,7 +99,7 @@ function AppMenuSidebar() {
     //     });
     // }, [setNavbar]);
 
-    const { navMenu, setNavMenu } = useAppMenu();
+    const { navMenu, setNavMenu } = useAppMenuUser();
 
     return (
         <>
