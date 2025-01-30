@@ -8,6 +8,9 @@ import { useForm } from "react-hook-form";
 // serivces
 import { userLogin } from "../../../../services/auth/user/authUser";
 
+// utils
+import { App_User } from "../../../../utils/constants";
+
 // plugin
 import Toast from "../../../../plugin/Toast";
 
@@ -42,11 +45,6 @@ function LoginForm({ sign }) {
 
             const { data, error } = await userLogin(email, password);
 
-            // console.log(`--->`, data);
-            // console.log(`----->`, error);
-            // console.log(`----->`, error?.message);
-            // console.log(`----->`, error?.data?.is_verified === false);
-
             if (error) {
                 if (error?.message) {
                     Toast("error", `${error?.message}.`);
@@ -72,7 +70,7 @@ function LoginForm({ sign }) {
                     "success",
                     `${data?.message || "Patient Login Successfully."}`
                 );
-                navigate(`/${"e"}/profile`);
+                navigate(`/${App_User}/profile`);
             }
         } catch (error) {
             console.log(`Error: ${error}`);
@@ -97,12 +95,10 @@ function LoginForm({ sign }) {
                                 value: /\S+@\S+\.\S+/,
                                 message: `Please Provide a valid email address`,
                             },
-                            value: userJson?.email || "p001@gmail.com",
+                            // value: userJson?.email || "p001@gmail.com",
                         })}
                         autoComplete="off"
                         required
-                        // value={email}
-                        // onChange={(e) => setEmail(e.target.value)}
                     />
                 </FormRowVertical>
 
@@ -123,12 +119,10 @@ function LoginForm({ sign }) {
                                 value: 8,
                                 message: `Password needs a minimum of 8 characters`,
                             },
-                            value: "Mazen@@1",
+                            // value: "Mazen@@1",
                         })}
                         autoComplete="off"
                         required
-                        // value={password}
-                        // onChange={(e) => setPassword(e.target.value)}
                     />
                     {!showPassword ? (
                         <HiEye

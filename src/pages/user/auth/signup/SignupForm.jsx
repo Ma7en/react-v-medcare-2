@@ -45,8 +45,7 @@ function SignupForm({ sign }) {
         passwordConfirm,
     }) => {
         try {
-            // console.log(`errors`, typeof errors.root);
-            if (errors.root) {
+            if (errors?.root) {
                 return;
             }
 
@@ -57,8 +56,6 @@ function SignupForm({ sign }) {
                 password,
                 passwordConfirm
             );
-
-            // console.log(`--->`, data);
 
             if (error) {
                 if (error?.message?.email[0]) {

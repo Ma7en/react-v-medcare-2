@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unescaped-entities */
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -59,6 +58,8 @@ function ConfirmResetPasswordForm() {
                     "success",
                     `${data?.message || "Password Changed Successfully."}`
                 );
+                localStorage.removeItem("userData");
+                localStorage.removeItem("userEmail");
                 navigate(`/login`);
             }
         } catch (error) {
@@ -93,7 +94,7 @@ function ConfirmResetPasswordForm() {
 
                 <div className="resend">
                     <p>
-                        Don't get the Code?
+                        Dont get the Code?
                         <a
                             onClick={() => {
                                 navigate(`/resetpassword`);

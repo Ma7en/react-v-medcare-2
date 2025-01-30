@@ -29,16 +29,18 @@ function ResetPasswordForm() {
 
     const handleRestPassword = async ({ email }) => {
         try {
-            // console.log(`errors`, typeof errors.root);
-            if (errors.root) {
+            if (errors?.root) {
                 return;
             }
 
             const { data, error } = await userResetPassword(email);
 
-            // console.log(`--->`, data);
-
             if (error) {
+                if (error?.data?.is_verified == false) {
+                    Toast("error", `${error?.message}.`);
+                    navigate(`/verifyaccount`);
+                }
+
                 if (error?.message) {
                     setErrorsMessage(error?.message);
                     Toast("error", `${error?.message}.`);
@@ -51,7 +53,7 @@ function ResetPasswordForm() {
                     `${data?.message || "OTP has been sent to your email."}`
                 );
                 localStorage.setItem(
-                    "userData",
+                    "userEmail",
                     JSON.stringify({ email: email })
                 );
                 navigate(`/confirmresetpassword`);

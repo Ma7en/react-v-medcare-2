@@ -4,8 +4,8 @@ import { create } from "zustand";
 // Import the 'mountStoreDevtool' function from the 'simple-zustand-devtools' library.
 import { mountStoreDevtool } from "simple-zustand-devtools";
 
-// Create a custom Zustand store named 'useAuthStore' using the 'create' function.
-const useAuthStore = create((set, get) => ({
+// Create a custom Zustand store named 'userAuthStore' using the 'create' function.
+const userAuthStore = create((set, get) => ({
     // Define the 'allUserData' state variable and initialize it to null.
     allUserData: null, // Use this to store all user data
 
@@ -31,8 +31,8 @@ const useAuthStore = create((set, get) => ({
 // Conditionally attach the DevTools only in a development environment.
 // if (process.env.DEV) {
 if (import.meta.env.DEV) {
-    mountStoreDevtool("Store", useAuthStore);
+    mountStoreDevtool("Store", userAuthStore);
 }
 
-// Export the 'useAuthStore' for use in other parts of the application.
-export { useAuthStore };
+// Export the 'userAuthStore' for use in other parts of the application.
+export { userAuthStore };

@@ -1,7 +1,6 @@
-/* eslint-disable react/no-unescaped-entities */
 /* eslint-disable no-unused-vars */
 import { useForm } from "react-hook-form";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 // style
@@ -45,7 +44,6 @@ function VerifyAccountForm() {
             }
 
             const { data, error } = await userVerifyAccount(otp);
-            // console.log("222", error);
 
             if (error) {
                 if (error?.message) {
@@ -59,6 +57,7 @@ function VerifyAccountForm() {
                     "success",
                     `${data?.message || "Account Verified Successfully."}`
                 );
+                localStorage.removeItem("userData");
                 navigate(`/login`);
             }
         } catch (error) {
@@ -159,9 +158,9 @@ function VerifyAccountForm() {
 
                 <div className="resend">
                     <p>
-                        Don't get the Code?
+                        Dont get the Code?
                         <a
-                            onClick={(e) => {
+                            onClick={() => {
                                 if (canResend) {
                                     handleResendOTP();
                                 }
@@ -178,7 +177,6 @@ function VerifyAccountForm() {
 
                 <FormRowVertical>
                     <Button size="large" disabled={isLoading}>
-                        {/* {`Verify`} */}
                         {!isLoading ? `Verify` : <SpinnerMini />}
                     </Button>
                 </FormRowVertical>

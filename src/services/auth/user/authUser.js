@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
-// Importing the useAuthStore hook from the '../store/auth' file to manage authentication state
-import { useAuthStore } from "../../../store/auth";
+// Importing the userAuthStore hook from the '../store/auth' file to manage authentication state
+import { userAuthStore } from "../../../store/userAuthStore";
 
 // Importing the axios library for making HTTP requests
 import axios from "../axios";
@@ -80,18 +80,11 @@ export const userRegister = async (
             password2,
         });
 
-        // console.log(`ee`, data);
-
-        // Logging in the newly registered user and displaying success toast
-        // await login(email, password);
-
         // Displaying a success toast notification
         Toast.fire({
             icon: "success",
-            title: "Sign Up Successfully",
+            title: "Sign Up Successfully.",
         });
-
-        // console.log(`userRegister`, { data, error: null }); // email: "m3@gmail.com"full_name: "Mazen Saad"
 
         if (data) {
             let userData = localStorage.setItem(
@@ -114,7 +107,7 @@ export const userRegister = async (
 // Function to handle verification account
 export const userVerifyAccount = async (otp_code) => {
     try {
-        // Making a POST request to register a new user
+        // Making a POST request to verify account
         const { data } = await axios.post("auth/patient/verify-account/", {
             otp_code,
         });
@@ -122,21 +115,13 @@ export const userVerifyAccount = async (otp_code) => {
         // Displaying a success toast notification
         Toast.fire({
             icon: "success",
-            title: "Verify Account Successfully",
+            title: "Verify Account Successfully.",
         });
-
-        if (data) {
-            let userData = localStorage.setItem(
-                "userData",
-                JSON.stringify(data?.data)
-            );
-        }
 
         // Returning data and error information
         return { data, error: null };
     } catch (error) {
         // Handling errors and returning data and error information
-        // console.log(`eee`, error);
         return {
             data: null,
             error: error?.response?.data || "Something went wrong",
@@ -144,10 +129,10 @@ export const userVerifyAccount = async (otp_code) => {
     }
 };
 
-// Function to handle verification account
+// Function to handle Resend OTP
 export const userResendOTP = async (email) => {
     try {
-        // Making a POST request to register a new user
+        // Making a POST request to resend OTP
         const { data } = await axios.post("auth/patient/resend-otp/", {
             email,
         });
@@ -162,7 +147,6 @@ export const userResendOTP = async (email) => {
         return { data, error: null };
     } catch (error) {
         // Handling errors and returning data and error information
-        // console.log(`eee`, error);
         return {
             data: null,
             error: error?.response?.data || "Something went wrong",
@@ -170,37 +154,24 @@ export const userResendOTP = async (email) => {
     }
 };
 
-// Function to handle user registration
+// Function to handle user login
 export const userLogin = async (email, password) => {
-    // console.log(`e`, email, password);
     try {
         // Making a POST request to login a new user
-        const { data } = await axios.post("auth/patient/login/", {
+        const { data, status } = await axios.post("auth/patient/login/", {
             email,
             password,
         });
 
-        // console.log(`data`, data);
-
         // Displaying a success toast notification
         Toast.fire({
             icon: "success",
-            title: "Login Successfully",
+            title: "Login Successfully.",
         });
 
-        if (data) {
-            let userData = localStorage.setItem(
-                "userData",
-                JSON.stringify(data?.data)
-            );
-            let accesstokenUser = localStorage.setItem(
-                "accesstokenUser",
-                JSON.stringify(data?.access_token)
-            );
-            let refreshtokenUser = localStorage.setItem(
-                "refreshtokenUser",
-                JSON.stringify(data?.refresh_token)
-            );
+        if (status === 200 || data?.code === 0) {
+            let userData = JSON.stringify(data?.data);
+            setAuthUser(userData, data?.access_token, data?.refresh_token);
         }
 
         // Returning data and error information
@@ -212,6 +183,70 @@ export const userLogin = async (email, password) => {
             error: error?.response?.data || "Something went wrong",
         };
     }
+};
+
+// Function to set the authenticated user and update user state
+export const setAuthUser = (data, access_token, refresh_token) => {
+    // Setting access and refresh tokens in cookies with expiration dates
+    Cookies.set("userData", data, {
+        expires: 7, // Refresh token expires in 7 days
+        secure: true,
+    });
+
+    Cookies.set("access_token", access_token, {
+        expires: 1, // Access token expires in 1 day
+        secure: true,
+    });
+
+    Cookies.set("refresh_token", refresh_token, {
+        expires: 7, // Refresh token expires in 7 days
+        secure: true,
+    });
+
+    // Decoding access token to get user information
+    const user = jwtDecode(access_token) ?? null;
+    // const user = jwt_decode(access_token) ?? null;
+    // console.log(`--`, user);
+    // console.log(`user`, user); // user_id: 9
+    // let user;
+    // if (access_token) {
+    //     user = jwt_decode(access_token);
+    //     console.log(`user`, user);
+    // } else {
+    //     console.error("Access token is missing");
+    // }
+
+    // console.log(`-userAuthStore:- `, userAuthStore);
+    // console.log(
+    //     `-userAuthStore.allUserData:- `,
+    //     userAuthStore((state) => state.allUserData)
+    // );
+    // console.log(
+    //     `-userAuthStore.loading:- `,
+    //     userAuthStore((state) => state.loading)
+    // );
+    // console.log(
+    //     `-userAuthStore.user:- `,
+    //     userAuthStore((state) => state.user)
+    // );
+    // console.log(
+    //     `-userAuthStore.setUser:- `,
+    //     userAuthStore((state) => state.setUser)
+    // );
+    // console.log(
+    //     `-userAuthStore.setLoading:- `,
+    //     userAuthStore((state) => state.setLoading)
+    // );
+    // console.log(
+    //     `-userAuthStore.isLoggedIn:- `,
+    //     userAuthStore((state) => state.isLoggedIn)
+    // );
+
+    // If user information is present, update user state; otherwise, set loading state to false
+    // if (user) {
+    //     userAuthStore.getState().setUser(user);
+    // }
+    // userAuthStore.getState().setLoading(false);
 };
 
 // Function to handle user change password
@@ -230,25 +265,11 @@ export const userChangePassword = async (
             confirm_password,
         });
 
-        // console.log(`ee`, data);
-
-        // Logging in the newly registered user and displaying success toast
-        // await login(email, password);
-
         // Displaying a success toast notification
         Toast.fire({
             icon: "success",
-            title: "Sign Up Successfully",
+            title: "Change Password Successfully.",
         });
-
-        // console.log(`userRegister`, { data, error: null }); // email: "m3@gmail.com"full_name: "Mazen Saad"
-
-        if (data) {
-            let userData = localStorage.setItem(
-                "userData",
-                JSON.stringify(data?.data)
-            );
-        }
 
         // Returning data and error information
         return { data, error: null };
@@ -264,23 +285,16 @@ export const userChangePassword = async (
 // Function to handle user Reset password
 export const userResetPassword = async (email) => {
     try {
-        // Making a POST request to register a new user
+        // Making a POST request to Reset password
         const { data } = await axios.post("auth/patient/reset-password/", {
             email,
         });
-
-        // console.log(`ee`, data);
-
-        // Logging in the newly registered user and displaying success toast
-        // await login(email, password);
 
         // Displaying a success toast notification
         Toast.fire({
             icon: "success",
             title: "Reset Password Successfully",
         });
-
-        // console.log(`userRegister`, { data, error: null }); // email: "m3@gmail.com"full_name: "Mazen Saad"
 
         if (data) {
             let userData = localStorage.setItem(
@@ -300,10 +314,10 @@ export const userResetPassword = async (email) => {
     }
 };
 
-// Function to handle user change password
+// Function to handle user Confirm Reset Password
 export const userConfirmResetPassword = async (otp, password, password2) => {
     try {
-        // Making a POST request to register a new user
+        // Making a POST request to Confirm Reset Password
         const { data } = await axios.post(
             "auth/patient/confirm-reset-password/",
             {
@@ -313,25 +327,11 @@ export const userConfirmResetPassword = async (otp, password, password2) => {
             }
         );
 
-        // console.log(`ee`, data);
-
-        // Logging in the newly registered user and displaying success toast
-        // await login(email, password);
-
         // Displaying a success toast notification
         Toast.fire({
             icon: "success",
             title: "Confirm Reset Password Successfully.",
         });
-
-        // console.log(`userRegister`, { data, error: null }); // email: "m3@gmail.com"full_name: "Mazen Saad"
-
-        if (data) {
-            let userData = localStorage.setItem(
-                "userData",
-                JSON.stringify(data?.data)
-            );
-        }
 
         // Returning data and error information
         return { data, error: null };
@@ -350,7 +350,7 @@ export const logout = () => {
     // Removing access and refresh tokens from cookies, resetting user state, and displaying success toast
     Cookies.remove("access_token");
     Cookies.remove("refresh_token");
-    useAuthStore.getState().setUser(null);
+    userAuthStore.getState().setUser(null);
 
     // Displaying a success toast notification
     Toast.fire({
@@ -377,39 +377,6 @@ export const setUser = async () => {
     } else {
         setAuthUser(accessToken, refreshToken);
     }
-};
-
-// Function to set the authenticated user and update user state
-export const setAuthUser = (access_token, refresh_token) => {
-    // console.log(`setAuthUser`, access_token, refresh_token);
-    // Setting access and refresh tokens in cookies with expiration dates
-    Cookies.set("access_token", access_token, {
-        expires: 1, // Access token expires in 1 day
-        secure: true,
-    });
-
-    Cookies.set("refresh_token", refresh_token, {
-        expires: 7, // Refresh token expires in 7 days
-        secure: true,
-    });
-
-    // Decoding access token to get user information
-    // const user = jwt_decode(access_token) ?? null;
-    const user = jwtDecode(access_token) ?? null;
-    // console.log(`user`, user); // user_id: 9
-    // let user;
-    // if (access_token) {
-    //     user = jwt_decode(access_token);
-    //     console.log(`user`, user);
-    // } else {
-    //     console.error("Access token is missing");
-    // }
-
-    // If user information is present, update user state; otherwise, set loading state to false
-    if (user) {
-        useAuthStore.getState().setUser(user);
-    }
-    useAuthStore.getState().setLoading(false);
 };
 
 // Function to refresh the access token using the refresh token

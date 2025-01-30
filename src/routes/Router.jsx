@@ -106,6 +106,9 @@ import VerifyAccount from "../pages/user/auth/verifyaccount/VerifyAccount";
 import ChangePassword from "../pages/user/auth/changepassword/ChangePassword";
 import ConfirmResetPassword from "../pages/user/auth/confirmresetpassword/ConfirmResetPassword";
 import PageNotFound from "../pages/error/PageNotFound";
+import ProtectedRouteUser from "../components/auth/ProtectedRouteUser";
+import AppLayoutUser from "../components/layouts/AppLayoutUser";
+import AppUser from "../pages/user/AppUser";
 // import ProtectedRouteAdmin from "../components/auth/ProtectedRouteAdmin";
 // import AppLayoutAdmin from "../components/layouts/AppLayoutAdmin";
 // import AppAdmin from "../pages/admin/AppAdmin";
@@ -189,11 +192,11 @@ function Router() {
 
                         {/* ===================================================================================== */}
                         {/* user */}
-                        {/* <Route
+                        <Route
                             path={`/${App_User}`}
                             element={
                                 <ProtectedRouteUser>
-                                    <AppUserLayout />
+                                    <AppLayoutUser />
                                 </ProtectedRouteUser>
                             }
                         >
@@ -213,7 +216,15 @@ function Router() {
                             />
                             <Route path={`${App_User}`} element={<AppUser />} />
                             <Route
+                                path={`${App_User}/`}
+                                element={<AppUser />}
+                            />
+                            <Route
                                 path={`/${App_User}`}
+                                element={<AppUser />}
+                            />
+                            <Route
+                                path={`/${App_User}/`}
                                 element={<AppUser />}
                             />
                             <Route path={`/user`} element={<AppUser />} />
@@ -225,7 +236,7 @@ function Router() {
                                 path={`/${App_User}/profile`}
                                 element={<AppUser />}
                             />
-                            <Route
+                            {/* <Route
                                 path={`/${App_User}/${App_User}/profile`}
                                 element={<AppUser />}
                             />
@@ -269,7 +280,7 @@ function Router() {
                                 path={`/${App_User}/${App_User}profile/:id`}
                                 element={<AppUser />}
                             />
- 
+
                             <Route
                                 path={`/${App_User}/updateprofile/:id`}
                                 element={<UpdateProfile />}
@@ -313,8 +324,8 @@ function Router() {
                             <Route
                                 path={`/${App_User}/profile/edit/:id`}
                                 element={<UpdateProfile />}
-                            />
-                        </Route> */}
+                            /> */}
+                        </Route>
 
                         {/* ===================================================================================== */}
                         {/*  <Route
