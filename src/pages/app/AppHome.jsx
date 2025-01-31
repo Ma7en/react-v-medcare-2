@@ -3,7 +3,7 @@
 
 import Heading from "../../ui/global/Heading";
 import Row from "../../ui/global/Row";
-import AppUserHome from "../../ui/user/AppUserHome";
+import AppUserHome from "../user/home/AppHomeUser";
 
 // import Heading from "../ui/Heading";
 // import Row from "../ui/Row";

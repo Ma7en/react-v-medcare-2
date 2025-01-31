@@ -2,8 +2,11 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { HiOutlineUser } from "react-icons/hi2";
 
+// store
+import useUserData from "../../store/userDataStore";
+
 // utils
-import { App_Url } from "../../utils/constants";
+import { App_User } from "../../utils/constants";
 
 // ui components
 import AppLogout from "./AppLogout";
@@ -23,6 +26,7 @@ const StyledHeaderMenu = styled.ul`
 
 function AppHeaderMenu() {
     const navigate = useNavigate();
+    let { userData } = useUserData();
 
     return (
         <>
@@ -30,7 +34,7 @@ function AppHeaderMenu() {
                 <li>
                     <ButtonIcon
                         onClick={() => {
-                            navigate(`${App_Url}/account`);
+                            navigate(`/${App_User}/account/${userData?.id}`);
                         }}
                     >
                         <HiOutlineUser />

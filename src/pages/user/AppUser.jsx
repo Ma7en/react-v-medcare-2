@@ -1,3 +1,7 @@
+// components
+import AppHomeUser from "./home/AppHomeUser";
+
+// ui
 import Heading from "../../ui/global/Heading";
 import Row from "../../ui/global/Row";
 
@@ -8,7 +12,9 @@ function AppUser() {
                 <Heading as="h1">Home</Heading>
                 {/* <p>TEST</p> */}
             </Row>
-            <Row>{/* <AppHomeUser /> */}</Row>
+            <Row>
+                <AppHomeUser />
+            </Row>
         </>
     );
 }

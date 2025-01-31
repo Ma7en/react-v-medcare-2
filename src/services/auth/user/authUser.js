@@ -25,42 +25,6 @@ const Toast = Swal.mixin({
     timerProgressBar: true,
 });
 
-// Function to handle user login
-export const login = async (email, password) => {
-    try {
-        // Making a POST request to obtain user tokens
-        const { data, status } = await axios.post("user/login/", {
-            email,
-            password,
-        });
-
-        // console.log(`login`, data); // refresh, access token
-
-        // If the request is successful (status code 200), set authentication user and display success toast
-        if (status === 200) {
-            setAuthUser(data?.access, data?.refresh);
-
-            // Displaying a success toast notification
-            Toast.fire({
-                icon: "success",
-                title: "Signed in successfully",
-            });
-        }
-
-        // Returning data and error information
-        return { data, error: null };
-    } catch (error) {
-        // Handling errors and returning data and error information
-        return {
-            data: null,
-            error: error?.response?.data?.detail,
-            // error?.response?.data?.detail ||
-            // "Invalid Data" ||
-            // "Something went wrong",
-        };
-    }
-};
-
 // =================================================================
 // Function to handle user registration
 export const userRegister = async (
@@ -113,7 +77,7 @@ export const userProfileID = async (id) => {
         // Displaying a success toast notification
         Toast.fire({
             icon: "success",
-            title: "Paitent Profile retrieved successfully.",
+            title: "Paitent Profile retrieved Successfully.",
         });
 
         // Returning data and error information
@@ -258,32 +222,6 @@ export const setAuthUser = (
     //     console.error("Access token is missing");
     // }
 
-    // console.log(`-userAuthStore:- `, userAuthStore);
-    // console.log(
-    //     `-userAuthStore.allUserData:- `,
-    //     userAuthStore((state) => state.allUserData)
-    // );
-    // console.log(
-    //     `-userAuthStore.loading:- `,
-    //     userAuthStore((state) => state.loading)
-    // );
-    // console.log(
-    //     `-userAuthStore.user:- `,
-    //     userAuthStore((state) => state.user)
-    // );
-    // console.log(
-    //     `-userAuthStore.setUser:- `,
-    //     userAuthStore((state) => state.setUser)
-    // );
-    // console.log(
-    //     `-userAuthStore.setLoading:- `,
-    //     userAuthStore((state) => state.setLoading)
-    // );
-    // console.log(
-    //     `-userAuthStore.isLoggedIn:- `,
-    //     userAuthStore((state) => state.isLoggedIn)
-    // );
-
     // If user information is present, update user state; otherwise, set loading state to false
     // if (user) {
     //     userAuthStore.getState().setUser(user);
@@ -328,11 +266,13 @@ export const userChangePassword = async (
 export const userRemoveData = () => {
     // Removing access and refresh tokens from cookies, resetting user state, and displaying success toast
     localStorage.removeItem("userData");
+    localStorage.removeItem("userEmail");
     Cookies.remove("access_token");
     Cookies.remove("refresh_token");
     Cookies.remove("userData");
     Cookies.remove("userProfile");
 };
+
 export const userLogout = async (refresh_token) => {
     try {
         // Making a POST request to logout
@@ -421,6 +361,23 @@ export const userConfirmResetPassword = async (otp, password, password2) => {
     }
 };
 
+// Function to refresh the access token using the refresh token
+export const getRefreshToken = async () => {
+    // Retrieving refresh token from cookies and making a POST request to refresh the access token
+    const refresh_token = Cookies.get("refresh_token");
+
+    if (refresh_token === "undefined") {
+        userRemoveData();
+    }
+
+    const response = await axios.post("auth/token/refresh/", {
+        refresh: refresh_token,
+    });
+
+    // Returning the refreshed access token
+    return response?.data; // Return the access token
+};
+
 // =================================================================
 // Function to handle user logout
 export const logout = () => {
@@ -454,29 +411,6 @@ export const setUser = async () => {
     } else {
         setAuthUser(accessToken, refreshToken);
     }
-};
-
-// Function to refresh the access token using the refresh token
-export const getRefreshToken = async () => {
-    // Retrieving refresh token from cookies and making a POST request to refresh the access token
-    const refresh_token = Cookies.get("refresh_token");
-    // const refresh_token =
-    //     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTczNjcwMTYzOSwiaWF0IjoxNzM2NjE1MjM5LCJqdGkiOiJkN2YzMzkyNTQ2NDg0NWEzOWU3YzcxMjA3NTQzNGY0NCIsInVzZXJfaWQiOjksImZ1bGxfbmFtZSI6Ik1hemVuIFNhYWQiLCJlbWFpbCI6Im0xMkBnbWFpbC5jb20iLCJ1c2VybmFtZSI6Im0xMiIsInZlbmRvcl9pZCI6MH0.-kjeCeMuXZJAnO4qN5pNAfxEdjdIDLcOGF_F3P6hKNA";
-
-    if (refresh_token === "undefined") {
-        // console.log(`1`, refresh_token);
-        Cookies.remove("access_token");
-        Cookies.remove("refresh_token");
-    }
-
-    const response = await axios.post("user/token/refresh/", {
-        refresh: refresh_token,
-    });
-
-    // console.log(`response`, response);
-
-    // Returning the refreshed access token
-    return response?.data; // Return the access token
 };
 
 // Function to check if the access token is expired

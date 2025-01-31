@@ -67,7 +67,7 @@ function AppSidebar() {
 
                 <StyledAppFooter>
                     Created By
-                    <span> mr. mazen saad</span>
+                    <span> mazen saad</span>
                 </StyledAppFooter>
 
                 {/* <Uploader /> */}

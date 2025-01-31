@@ -52,9 +52,6 @@ function AppLogout() {
         }
     };
 
-    // const { logout, isLoading } = useLogout();
-    // const { logout, isLoading } = useState();
-
     return (
         <>
             <ButtonIcon

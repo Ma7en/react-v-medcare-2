@@ -1,11 +1,14 @@
-/* eslint-disable no-undef */
-/* eslint-disable no-unused-vars */
 import styled from "styled-components";
-import quotes from "quotesy";
-import { useUser } from "../../features/authentication/useUser";
-import Row from "../global/Row";
-// import { useUser } from "../../features/authentication/useUser";
-// import Row from "../Row";
+// import quotes from "quotesy";
+
+// store
+import useUserData from "../../../store/userDataStore";
+
+// ui
+import Row from "../../../ui/global/Row";
+
+// assets
+import imageuser from "../../../assets/images/user/default-user.jpg";
 
 const StyledUserAvatar = styled.div`
     display: flex;
@@ -67,13 +70,11 @@ const Cite = styled.cite`
     font-size: 1.6rem;
 `;
 
-function AppUserHome() {
-    const { user } = useUser();
-    // console.log(`user:- `, user);
-    const { fullName, avatar } = user.user_metadata;
-
+function AppHomeUser() {
     // console.log(quotes.random());
-    const { author, text } = quotes.random();
+    // const { author, text } = quotes.random();
+
+    let { userData, userProfile } = useUserData();
 
     return (
         <>
@@ -81,16 +82,16 @@ function AppUserHome() {
                 <Row>
                     <Avatar
                         // src={avatar || `images/user/default-user.jpg`}
-                        src={avatar || "/images/user/default-user.jpg"}
-                        alt={`Avatar of ${fullName}`}
+                        src={`${userProfile?.image || imageuser}`}
+                        alt={`Avatar of ${userData?.first_name} ${userData?.last_name}`}
                     />
-                    <Name>{fullName}</Name>
+                    <Name>{`${userData?.first_name} ${userData?.last_name}`}</Name>
                 </Row>
 
                 <Row>
                     <Blockquote>
-                        <Text>{text}</Text>
-                        <Cite>-{author}</Cite>
+                        <Text>{"text"}</Text>
+                        <Cite>-{"author"}</Cite>
                     </Blockquote>
                 </Row>
             </StyledUserAvatar>
@@ -98,4 +99,4 @@ function AppUserHome() {
     );
 }
 
-export default AppUserHome;
+export default AppHomeUser;

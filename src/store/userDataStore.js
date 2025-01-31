@@ -5,6 +5,7 @@ import { jwtDecode } from "jwt-decode";
 function useUserData() {
     // Retrieve the access token and refresh token from browser cookies
     let userdata = Cookies.get("userData");
+    let userprofile = Cookies.get("userProfile");
     let access_token = Cookies.get("access_token");
     let refresh_token = Cookies.get("refresh_token");
 
@@ -16,7 +17,8 @@ function useUserData() {
         // Return the decoded user data, which may include user information
         // return datauser;
         let userData = JSON.parse(userdata);
-        return { userData, decoded };
+        let userProfile = JSON.parse(userprofile);
+        return { userData, userProfile, decoded };
     } else {
         return {};
         // console.log("Not Found");

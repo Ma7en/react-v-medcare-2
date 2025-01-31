@@ -14,7 +14,7 @@ import {
 import { FaAmbulance, FaNotesMedical, FaUserMd } from "react-icons/fa";
 
 // utils
-import { App_Url } from "../../utils/constants";
+import { App_Url, App_User } from "../../utils/constants";
 
 // context
 import { useAppMenuUser } from "../../contexts/AppMenuContextUser";
@@ -181,7 +181,7 @@ function AppMainNav() {
                 <NavList>
                     <li>
                         <StyledNavLink
-                            to={`${App_Url}/home`}
+                            to={`/${App_User}/home`}
                             onClick={() => {
                                 setNavMenu(false);
                             }}

@@ -109,6 +109,7 @@ import PageNotFound from "../pages/error/PageNotFound";
 import ProtectedRouteUser from "../components/auth/ProtectedRouteUser";
 import AppLayoutUser from "../components/layouts/AppLayoutUser";
 import AppUser from "../pages/user/AppUser";
+import AccountUser from "../pages/user/account/AccountUser";
 // import ProtectedRouteAdmin from "../components/auth/ProtectedRouteAdmin";
 // import AppLayoutAdmin from "../components/layouts/AppLayoutAdmin";
 // import AppAdmin from "../pages/admin/AppAdmin";
@@ -205,7 +206,7 @@ function Router() {
                                 element={
                                     <Navigate
                                         replace
-                                        to={`${App_User}/profile`}
+                                        to={`/${App_User}/profile`}
                                     />
                                 }
                             />
@@ -214,13 +215,13 @@ function Router() {
                                 path={`/${App_User}`}
                                 component={Router}
                             />
+                            <Route
+                                path={`/${App_User}`}
+                                element={<AppUser />}
+                            />
                             <Route path={`${App_User}`} element={<AppUser />} />
                             <Route
                                 path={`${App_User}/`}
-                                element={<AppUser />}
-                            />
-                            <Route
-                                path={`/${App_User}`}
                                 element={<AppUser />}
                             />
                             <Route
@@ -279,6 +280,16 @@ function Router() {
                             <Route
                                 path={`/${App_User}/${App_User}profile/:id`}
                                 element={<AppUser />}
+                            />
+                            <Route
+                                path={`/${App_User}/home`}
+                                element={<AppUser />}
+                            />
+
+                            {/*  */}
+                            <Route
+                                path={`/${App_User}/account/:id`}
+                                element={<AccountUser />}
                             />
 
                             {/* 
