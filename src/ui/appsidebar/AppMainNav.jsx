@@ -10,6 +10,7 @@ import {
     HiCube,
     HiMiniBookOpen,
     HiOutlineHome,
+    HiOutlineUser,
 } from "react-icons/hi2";
 import { FaAmbulance, FaNotesMedical, FaUserMd } from "react-icons/fa";
 
@@ -188,6 +189,18 @@ function AppMainNav() {
                         >
                             <HiOutlineHome />
                             <span>Home</span>
+                        </StyledNavLink>
+                    </li>
+
+                    <li>
+                        <StyledNavLink
+                            to={`/${App_User}/account`}
+                            onClick={() => {
+                                setNavMenu(false);
+                            }}
+                        >
+                            <HiOutlineUser />
+                            <span>Account</span>
                         </StyledNavLink>
                     </li>
 

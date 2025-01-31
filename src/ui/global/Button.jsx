@@ -76,6 +76,7 @@ const variations = {
 };
 
 const Button = styled.button`
+    padding-block: 10px !important;
     display: inline-flex;
     align-items: center;
     justify-content: center;

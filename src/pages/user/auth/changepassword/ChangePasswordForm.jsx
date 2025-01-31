@@ -39,7 +39,7 @@ function ChangePasswordForm() {
     } = useForm();
     const { errors } = formState;
 
-    const handleSignUp = async ({
+    const handleChangePassword = async ({
         old_password,
         new_password,
         confirm_password,
@@ -87,7 +87,7 @@ function ChangePasswordForm() {
 
     return (
         <>
-            <Form onSubmit={handleSubmit(handleSignUp)}>
+            <Form onSubmit={handleSubmit(handleChangePassword)}>
                 <FormRowPass
                     label="Old Password"
                     error={errors?.old_password?.message || errorsMessage}
@@ -172,8 +172,8 @@ function ChangePasswordForm() {
 
                 <FormRow>
                     <Button
-                        variation="secondary"
                         type="reset"
+                        variation="secondary"
                         disabled={isLoading}
                         onClick={reset}
                     >

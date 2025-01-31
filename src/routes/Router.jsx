@@ -286,9 +286,13 @@ function Router() {
                                 element={<AppUser />}
                             />
 
-                            {/*  */}
+                            {/* Account */}
                             <Route
                                 path={`/${App_User}/account/:id`}
+                                element={<AccountUser />}
+                            />
+                            <Route
+                                path={`/${App_User}/account`}
                                 element={<AccountUser />}
                             />
 
@@ -500,10 +504,6 @@ function Router() {
                             />
                             <Route
                                 path="/contact/us"
-                                element={<ContactPage />}
-                            />
-                            <Route
-                                path="/contact-us"
                                 element={<ContactPage />}
                             />
                             <Route

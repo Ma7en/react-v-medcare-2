@@ -1,97 +1,181 @@
+/* eslint-disable no-unused-vars */
 import { useForm } from "react-hook-form";
+import { useState } from "react";
+import { HiEye, HiEyeSlash } from "react-icons/hi2";
+import { useNavigate } from "react-router-dom";
 
-// import Button from "../../ui/Button";
-// import Form from "../../ui/Form";
-// import FormRow from "../../ui/FormRow";
-// import Input from "../../ui/Input";
+// services
+import { userChangePassword } from "../../../../services/auth/user/authUser";
 
-import { useUpdateUser } from "../../../../features/authentication/useUpdateUser";
+// plugin
+import Toast from "../../../../plugin/Toast";
+
+// ui form
 import Form from "../../../../ui/form/Form";
 import FormRow from "../../../../ui/form/FormRow";
 import Input from "../../../../ui/form/Input";
 import Button from "../../../../ui/global/Button";
 import FormRowPass from "../../../../ui/form/FormRowPass";
-import { useState } from "react";
-import { HiEye, HiEyeSlash } from "react-icons/hi2";
-// import FormRowVertical from "../../ui/form/FormRowVertical";
+
+// ui
+import SpinnerMini from "../../../../ui/spinner/SpinnerMini";
 
 function UpdatePasswordForm() {
-    const { register, handleSubmit, formState, getValues, reset } = useForm();
-    const { errors } = formState;
-    const { updateUser, isUpdating } = useUpdateUser();
-    const [showPassword, setShowPassword] = useState(false);
+    const navigate = useNavigate();
 
-    function onSubmit({ password }) {
-        updateUser(
-            { password },
-            {
-                // onSuccess: reset
-                onSuccess: () => {
-                    reset();
-                },
+    const [isLoading, setIsLoading] = useState(false);
+    const [errorsMessage, setErrorsMessage] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
+    let refreshtokenUser = localStorage.getItem("refreshtokenUser");
+    let refreshtokenUserJson = JSON.parse(refreshtokenUser);
+
+    const { register, formState, getValues, handleSubmit, reset } = useForm();
+    const { errors } = formState;
+
+    const handleChangePassword = async ({
+        old_password,
+        new_password,
+        confirm_password,
+    }) => {
+        try {
+            if (errors.root) {
+                return;
             }
-        );
-    }
+
+            const { data, error } = await userChangePassword(
+                refreshtokenUserJson,
+                old_password,
+                new_password,
+                confirm_password
+            );
+
+            if (error) {
+                if (error?.message && typeof error.message === "string") {
+                    Toast("error", `${error?.message || "Invalid token"}.`);
+                    setIsLoading(false);
+                }
+                if (error?.message?.password) {
+                    Toast(
+                        "error",
+                        `${
+                            error?.message?.password ||
+                            "Old password is incorrect"
+                        }.`
+                    );
+                    setErrorsMessage(error?.message?.password);
+                    setIsLoading(false);
+                }
+            } else {
+                setIsLoading(true);
+                Toast(
+                    "success",
+                    `${data?.message || "Password Changed Successfully."}`
+                );
+                navigate(`/`);
+            }
+        } catch (error) {
+            console.log(`Error: ${error}`);
+        }
+    };
 
     return (
         <>
-            <Form type="updata" onSubmit={handleSubmit(onSubmit)}>
+            <Form type="updata" onSubmit={handleSubmit(handleChangePassword)}>
                 <FormRowPass
-                    label="New Password (min 8 characters)"
-                    error={errors?.password?.message}
-                    // sign={sign}
-                >
-                    <>
-                        <Input
-                            type={!showPassword ? "password" : "text"}
-                            id="password"
-                            autoComplete="current-password"
-                            disabled={isUpdating}
-                            {...register("password", {
-                                required: "This field is required",
-                                minLength: {
-                                    value: 8,
-                                    message:
-                                        "Password needs a minimum of 8 characters",
-                                },
-                            })}
-                        />
-                        {!showPassword ? (
-                            <HiEye
-                                onClick={() => setShowPassword((show) => !show)}
-                            />
-                        ) : (
-                            <HiEyeSlash
-                                onClick={() => setShowPassword((show) => !show)}
-                            />
-                        )}
-                    </>
-                </FormRowPass>
-
-                <FormRowPass
-                    label="Confirm password"
-                    error={errors?.passwordConfirm?.message}
+                    label="Old Password"
+                    error={errors?.old_password?.message || errorsMessage}
                 >
                     <Input
                         type={!showPassword ? "password" : "text"}
-                        autoComplete="new-password"
-                        id="passwordConfirm"
-                        disabled={isUpdating}
-                        {...register("passwordConfirm", {
-                            required: "This field is required",
-                            validate: (value) =>
-                                getValues().password === value ||
-                                "Passwords need to match",
+                        id="old_password"
+                        name="old_password"
+                        disabled={isLoading}
+                        {...register("old_password", {
+                            required: `This field is required`,
+                            minLength: {
+                                value: 8,
+                                message: `Password needs a minimum of 8 characters`,
+                            },
+                            // value: "Mazen@@1",
                         })}
+                        autoComplete="off"
+                        required
+                    />
+                    {!showPassword ? (
+                        <HiEye
+                            onClick={() => {
+                                setShowPassword((show) => !show);
+                            }}
+                        />
+                    ) : (
+                        <HiEyeSlash
+                            onClick={() => {
+                                setShowPassword((show) => !show);
+                            }}
+                        />
+                    )}
+                </FormRowPass>
+
+                <FormRowPass
+                    label="New Password (min 8 characters)"
+                    error={errors?.new_password?.message}
+                >
+                    <Input
+                        type={!showPassword ? "password" : "text"}
+                        id="new_password"
+                        name="new_password"
+                        disabled={isLoading}
+                        {...register("new_password", {
+                            required: `This field is required`,
+                            minLength: {
+                                value: 8,
+                                message: `Password needs a minimum of 8 characters`,
+                            },
+                            // value: "Mazen@@1",
+                        })}
+                        autoComplete="off"
+                        required
+                    />
+                </FormRowPass>
+
+                <FormRowPass
+                    label="confirm password"
+                    error={errors?.confirm_password?.message}
+                >
+                    <Input
+                        type={!showPassword ? "password" : "text"}
+                        id="confirm_password"
+                        name="confirm_password"
+                        disabled={isLoading}
+                        {...register("confirm_password", {
+                            required: `This field is required`,
+                            minLength: {
+                                value: 8,
+                                message: `Password needs a minimum of 8 characters`,
+                            },
+                            validate: (value) =>
+                                value === getValues()?.new_password ||
+                                `Passwords need to match`,
+                            // value: "Mazen@@1",
+                        })}
+                        autoComplete="off"
+                        required
                     />
                 </FormRowPass>
 
                 <FormRow>
-                    <Button onClick={reset} type="reset" variation="secondary">
+                    <Button
+                        type="reset"
+                        variation="secondary"
+                        disabled={isLoading}
+                        onClick={reset}
+                    >
                         Cancel
                     </Button>
 
-                    <Button disabled={isUpdating}>Update password</Button>
+                    <Button type="submit" disabled={isLoading}>
+                        {isLoading ? <SpinnerMini /> : `Update`}
+                    </Button>
                 </FormRow>
             </Form>
         </>
