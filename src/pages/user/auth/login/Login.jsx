@@ -16,7 +16,7 @@ export default function Login() {
         <>
             <Main type="loginpage" className="loginpage">
                 <div className="login">
-                    <div className="container">
+                    <div className="container" data-aos="fade-up">
                         <section>
                             <Heading as="h3">Log in to your account</Heading>
 

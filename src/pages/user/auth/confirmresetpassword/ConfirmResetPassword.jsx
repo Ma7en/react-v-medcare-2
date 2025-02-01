@@ -13,7 +13,7 @@ function ConfirmResetPassword() {
         <>
             <Main type="loginpage" className="loginpage">
                 <div className="confirmresetpassword">
-                    <div className="container">
+                    <div className="container" data-aos="fade-up">
                         <section>
                             <Heading as="h3">Confirm Reset Password</Heading>
 

@@ -13,7 +13,7 @@ function ContactPage() {
         <>
             <Main type="loginpage" className="loginpage">
                 <div className="contactpage">
-                    <div className="container">
+                    <div className="container" data-aos="fade-up">
                         <section>
                             <Heading as="h3">Contact</Heading>
 

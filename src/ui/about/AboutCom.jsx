@@ -44,7 +44,7 @@ function AboutCom() {
                     <div className="wave" id="wave4" />
                 </div>
 
-                <div className="container">
+                <div className="container" data-aos="fade-up">
                     <Heading as="h2">
                         <span>about</span>
                         us
@@ -55,9 +55,10 @@ function AboutCom() {
                             src={aboutimage}
                             alt={`We Take Care Of Your Healthy Life`}
                             caption={`We Take Care Of Your Healthy Life`}
+                            data-aos="fade-left"
                         />
 
-                        <div className="content">
+                        <div className="content" data-aos="fade-left">
                             <Heading as="h3">
                                 We Take Care Of Your Healthy Life
                             </Heading>

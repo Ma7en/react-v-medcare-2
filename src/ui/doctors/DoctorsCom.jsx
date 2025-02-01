@@ -28,7 +28,7 @@ function DoctorsCom() {
                     <div className="wave" id="wave4" />
                 </div>
 
-                <div className="container">
+                <div className="container" data-aos="fade-up">
                     <Heading as="h2">
                         our
                         <span>doctors</span>

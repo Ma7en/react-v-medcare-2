@@ -28,7 +28,7 @@ const StyledLogo = styled(Link)`
 function Logo() {
     return (
         <>
-            <StyledLogo to="/home" className="logo">
+            <StyledLogo to="/" className="logo">
                 <FaHeartbeat />
                 <span>medcare.</span>
             </StyledLogo>

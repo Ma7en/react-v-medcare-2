@@ -16,7 +16,7 @@ export default function Signup() {
         <>
             <Main type="loginpage" className="loginpage">
                 <div className="signup">
-                    <div className="container">
+                    <div className="container" data-aos="fade-up">
                         <section>
                             <Heading as="h3">Signup to your account</Heading>
 

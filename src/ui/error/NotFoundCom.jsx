@@ -21,7 +21,7 @@ function NotFoundCom() {
     return (
         <>
             <div className="notfound">
-                <div className="container">
+                <div className="container" data-aos="fade-up">
                     <section>
                         <div>
                             <Heading as="h3">Page not found 😢</Heading>

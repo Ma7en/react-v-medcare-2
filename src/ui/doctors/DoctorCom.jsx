@@ -22,7 +22,7 @@ function DoctorCom({ doctor }) {
 
     return (
         <>
-            <div className="box">
+            <div className="box" data-aos="flip-right">
                 <img
                     src={doctorimage || imagenotfound}
                     alt={`doctor-${id}-${name}`}

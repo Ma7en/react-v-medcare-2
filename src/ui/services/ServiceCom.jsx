@@ -21,7 +21,7 @@ function ServiceCom({ service }) {
 
     return (
         <>
-            <div className="box">
+            <div className="box" data-aos="flip-left">
                 {icon === "FaUserMd" && <FaUserMd />}
                 {icon === "FaNotesMedical" && <FaNotesMedical />}
                 {icon === "FaAmbulance" && <FaAmbulance />}

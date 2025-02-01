@@ -47,6 +47,7 @@ function IconCom({ iconnumber }) {
                 onClick={() => {
                     navigate(`/book`);
                 }}
+                data-aos="flip-up"
             >
                 {icon == "FaNotesMedical" && <FaHospital />}
                 {icon === "FaProcedures" && <FaProcedures />}

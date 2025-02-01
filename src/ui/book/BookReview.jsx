@@ -10,7 +10,7 @@ function BookReview() {
     return (
         <>
             <div className="book">
-                <div className="container">
+                <div className="container" data-aos="fade-up">
                     <section>
                         <Heading as="h3">book appointment</Heading>
 

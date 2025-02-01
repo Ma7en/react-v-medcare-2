@@ -11,7 +11,7 @@ function ReviewCom({ review }) {
 
     return (
         <>
-            <div className="box">
+            <div className="box" data-aos="zoom-in-right">
                 <img
                     src={reviewimage || imagenotfound}
                     alt={`review${id}-${name}`}

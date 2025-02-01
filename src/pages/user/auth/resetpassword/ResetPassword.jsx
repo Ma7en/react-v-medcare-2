@@ -16,7 +16,7 @@ export default function ResetPassword() {
         <>
             <Main type="loginpage" className="loginpage">
                 <div className="resetpassword">
-                    <div className="container">
+                    <div className="container" data-aos="fade-up">
                         <section>
                             <Heading as="h3">
                                 Reset Password to your account

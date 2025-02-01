@@ -28,7 +28,7 @@ function AboutViewCom() {
     return (
         <>
             <div className="aboutviewcom">
-                <div className="container">
+                <div className="container" data-aos="fade-up">
                     {aboutus.length > 0 &&
                         aboutus?.map((about, index) => (
                             <section key={index}>

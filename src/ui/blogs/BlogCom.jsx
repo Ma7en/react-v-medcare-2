@@ -14,7 +14,7 @@ function BlogCom({ blog }) {
     const { id, image, data, adminname, adminid, title, summary } = blog;
     return (
         <>
-            <div className="box">
+            <div className="box" data-aos="flip-left">
                 <div className="image">
                     <img
                         src={imageblog || imagenotfound}

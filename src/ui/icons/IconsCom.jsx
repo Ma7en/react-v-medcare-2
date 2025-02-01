@@ -39,7 +39,7 @@ function IconsCom() {
                     <div className="wave" id="wave4" />
                 </div>
 
-                <div className="container">
+                <div className="container" data-aos="fade-up">
                     {iconscomponents?.length > 0 &&
                         iconscomponents?.map((iconnumber, index) => (
                             <IconCom iconnumber={iconnumber} key={index} />

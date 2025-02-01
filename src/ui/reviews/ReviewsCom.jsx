@@ -27,7 +27,7 @@ function ReviewsCom() {
                     <div className="wave" id="wave4" />
                 </div>
 
-                <div className="container">
+                <div className="container" data-aos="fade-up">
                     <h1 className="heading">
                         client's
                         <span>review</span>

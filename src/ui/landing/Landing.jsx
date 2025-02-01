@@ -17,11 +17,11 @@ function Landing() {
         <>
             <section className="landing" id="landing">
                 <div className="container">
-                    <div className="image">
+                    <div className="image" data-aos="fade-right">
                         <img src={landingpage} alt={`home page - landing`} />
                     </div>
 
-                    <div className="content">
+                    <div className="content" data-aos="fade-left">
                         <Heading as="h3">stay safe, stay healthy</Heading>
 
                         <p>

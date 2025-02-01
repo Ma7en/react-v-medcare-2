@@ -16,7 +16,7 @@ export default function VerifyAccount() {
         <>
             <Main type="loginpage" className="loginpage">
                 <div className="verifyaccount">
-                    <div className="container">
+                    <div className="container" data-aos="fade-up">
                         <section>
                             <Heading as="h3">Verify Account</Heading>
 
