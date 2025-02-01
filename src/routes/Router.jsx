@@ -110,6 +110,9 @@ import ProtectedRouteUser from "../components/auth/ProtectedRouteUser";
 import AppLayoutUser from "../components/layouts/AppLayoutUser";
 import AppUser from "../pages/user/AppUser";
 import AccountUser from "../pages/user/account/AccountUser";
+import ContactUser from "../pages/user/contact/ContactUser";
+import ReviewUser from "../pages/user/review/ReviewUser";
+import BookUser from "../pages/user/book/BookUser";
 // import ProtectedRouteAdmin from "../components/auth/ProtectedRouteAdmin";
 // import AppLayoutAdmin from "../components/layouts/AppLayoutAdmin";
 // import AppAdmin from "../pages/admin/AppAdmin";
@@ -295,7 +298,6 @@ function Router() {
                                 path={`/${App_User}/account`}
                                 element={<AccountUser />}
                             />
-
                             {/* 
                             <Route
                                 path={`/${App_User}/updateprofile/:id`}
@@ -341,6 +343,24 @@ function Router() {
                                 path={`/${App_User}/profile/edit/:id`}
                                 element={<UpdateProfile />}
                             /> */}
+
+                            {/* book */}
+                            <Route
+                                path={`/${App_User}/book`}
+                                element={<BookUser />}
+                            />
+
+                            {/* contact */}
+                            <Route
+                                path={`/${App_User}/contact`}
+                                element={<ContactUser />}
+                            />
+
+                            {/* review */}
+                            <Route
+                                path={`/${App_User}/review`}
+                                element={<ReviewUser />}
+                            />
                         </Route>
 
                         {/* ===================================================================================== */}
@@ -668,8 +688,10 @@ function Router() {
                             {/* <Route
                                 path="/password-reset/:uid/:token"
                                 element={<PasswordResetConfirm />}
-                            />
-                            <Route path="/logout" element={<Logout />} /> */}
+                            />*/}
+
+                            {/*  */}
+                            {/* <Route path="/logout" element={<Logout />} /> */}
                         </Route>
 
                         {/* ======================================================================== */}

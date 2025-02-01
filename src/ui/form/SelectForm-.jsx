@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import styled from "styled-components";
 
@@ -30,18 +31,23 @@ const StyledSelect = styled.select`
     }
 `;
 
-function Select({ options, value, onChange, ...props }) {
+function SelectForm({ options, value, onChange, ...props }) {
+    console.log(`e`, options);
     return (
         <>
-            <StyledSelect value={value} onChange={onChange} {...props}>
+            <select name="" id="">
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select>
+            {/* <StyledSelect value={value} onChange={onChange} {...props}>
                 {options?.map((option, index) => (
                     <option key={index} value={option?.value}>
                         {option?.label}
                     </option>
                 ))}
-            </StyledSelect>
+            </StyledSelect> */}
         </>
     );
 }
 
-export default Select;
+export default SelectForm;

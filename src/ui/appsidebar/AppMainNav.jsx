@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import {
@@ -7,7 +8,9 @@ import {
     HiChatBubbleLeftEllipsis,
     HiChevronDown,
     HiChevronUp,
+    HiCommandLine,
     HiCube,
+    HiInbox,
     HiMiniBookOpen,
     HiOutlineHome,
     HiOutlineUser,
@@ -206,6 +209,42 @@ function AppMainNav() {
 
                     <li>
                         <StyledNavLink
+                            to={`/${App_User}/book`}
+                            onClick={() => {
+                                setNavMenu(false);
+                            }}
+                        >
+                            <FaNotesMedical />
+                            <span>book</span>
+                        </StyledNavLink>
+                    </li>
+
+                    <li>
+                        <StyledNavLink
+                            to={`/${App_User}/contact`}
+                            onClick={() => {
+                                setNavMenu(false);
+                            }}
+                        >
+                            <HiInbox />
+                            <span>Contact</span>
+                        </StyledNavLink>
+                    </li>
+
+                    <li>
+                        <StyledNavLink
+                            to={`/${App_User}/review`}
+                            onClick={() => {
+                                setNavMenu(false);
+                            }}
+                        >
+                            <HiChatBubbleLeftEllipsis />
+                            <span>review</span>
+                        </StyledNavLink>
+                    </li>
+
+                    {/* <li>
+                        <StyledNavLink
                             to={`${App_Url}/services`}
                             onClick={() => {
                                 setNavMenu(false);
@@ -213,18 +252,6 @@ function AppMainNav() {
                         >
                             <FaAmbulance />
                             <span>services</span>
-                        </StyledNavLink>
-                    </li>
-
-                    <li>
-                        <StyledNavLink
-                            to={`${App_Url}/book`}
-                            onClick={() => {
-                                setNavMenu(false);
-                            }}
-                        >
-                            <FaNotesMedical />
-                            <span>book</span>
                         </StyledNavLink>
                     </li>
 
@@ -322,7 +349,7 @@ function AppMainNav() {
                                 ""
                             )}
                         </StyledNavList>
-                    </li>
+                    </li> */}
                 </NavList>
             </StyledNav>
         </>

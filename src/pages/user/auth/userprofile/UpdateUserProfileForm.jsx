@@ -20,11 +20,11 @@ import Form from "../../../../ui/form/Form";
 import FormRow from "../../../../ui/form/FormRow";
 import Input from "../../../../ui/form/Input";
 import Button from "../../../../ui/global/Button";
-import SpinnerMini from "../../../../ui/spinner/SpinnerMini";
+import FormRowVertical from "../../../../ui/form/FormRowVertical";
 
 // ui
-import FormRowVertical from "../../../../ui/form/FormRowVertical";
-import Select from "../../../../ui/table/Select";
+import SpinnerMini from "../../../../ui/spinner/SpinnerMini";
+import SelectForm from "../../../../ui/form/SelectForm";
 
 function UpdateUserProfileForm() {
     const navigate = useNavigate();
@@ -33,50 +33,56 @@ function UpdateUserProfileForm() {
     const [errorsMessage, setErrorsMessage] = useState("");
     let { userData, userProfile } = useUserData();
     let user = userData?.id;
+    let userPhoneNumber = userProfile?.phone_number;
+    let userAge = userProfile?.age;
 
     const { register, formState, getValues, handleSubmit, reset } = useForm();
     const { errors } = formState;
 
-    const handleChangePassword = async ({
-        gander,
+    const handleUpdateProfile = async ({
+        gender,
         image,
         phone_number,
         age,
     }) => {
-        try {
-            if (errors.root) {
-                return;
-            }
+        console.log(`d`, gender);
+        console.log(`d`, image);
+        console.log(`d`, phone_number);
+        console.log(`d`, age);
+        // try {
+        //     if (errors.root) {
+        //         return;
+        //     }
 
-            const { data, error } = await userProfileUpdate(
-                gander,
-                image,
-                phone_number,
-                age,
-                user
-            );
+        //     const { data, error } = await userProfileUpdate(
+        //         gander,
+        //         image,
+        //         phone_number,
+        //         age,
+        //         user
+        //     );
 
-            if (error) {
-                if (error?.message && typeof error.message === "string") {
-                    Toast("error", `${error?.message || "Invalid token"}.`);
-                    setIsLoading(false);
-                }
-            } else {
-                setIsLoading(true);
-                Toast(
-                    "success",
-                    `${data?.message || "Password Changed Successfully."}`
-                );
-                navigate(`/${App_User}/home`);
-            }
-        } catch (error) {
-            console.log(`Error: ${error}`);
-        }
+        //     if (error) {
+        //         if (error?.message && typeof error.message === "string") {
+        //             Toast("error", `${error?.message || "Invalid token"}.`);
+        //             setIsLoading(false);
+        //         }
+        //     } else {
+        //         setIsLoading(true);
+        //         Toast(
+        //             "success",
+        //             `${data?.message || "Password Changed Successfully."}`
+        //         );
+        //         navigate(`/${App_User}/home`);
+        //     }
+        // } catch (error) {
+        //     console.log(`Error: ${error}`);
+        // }
     };
 
     return (
         <>
-            <Form type="updata" onSubmit={handleSubmit(handleChangePassword)}>
+            <Form type="updata" onSubmit={handleSubmit(handleUpdateProfile)}>
                 {/* <FormRowVertical
                     label="gender"
                     error={errors?.phone_number?.message || errorsMessage}
@@ -98,7 +104,29 @@ function UpdateUserProfileForm() {
                         // required
                     />
                 </FormRowVertical> */}
-                {/* <Select options={["Male", "Female"]} /> */}
+                {/* <Select options={[{ value: "name-asc", label: "Sort by name (A-Z)" }]} /> */}
+
+                <FormRowVertical
+                    label="gender"
+                    error={errors?.gender?.message || errorsMessage}
+                >
+                    <SelectForm
+                        name="gender"
+                        id="gender"
+                        {...register("gender", {
+                            // required: `This field is required`,
+                            // minLength: {
+                            //     value: 8,
+                            //     message: `Password needs a minimum of 8 characters`,
+                            // },
+                            // value: "Mazen@@1",
+                        })}
+                        autoComplete="off"
+                    >
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </SelectForm>
+                </FormRowVertical>
 
                 <FormRowVertical
                     label="phone number"

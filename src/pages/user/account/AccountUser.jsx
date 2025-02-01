@@ -17,7 +17,9 @@ export default function AccountUser() {
 
     return (
         <>
-            <Heading as="h1">Account</Heading>
+            <Row type="horizontal">
+                <Heading as="h1">Account</Heading>
+            </Row>
 
             {/* <Row>
                 <Heading as="h5">Update User</Heading>

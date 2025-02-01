@@ -4,16 +4,19 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
+// store
+import useUserData from "../../../store/userDataStore";
+
 // form components
 import Form from "../../../ui/form/Form";
 import FormRow from "../../../ui/form/FormRow";
 import FormRowVertical from "../../../ui/form/FormRowVertical";
 import Input from "../../../ui/form/Input";
 import Button from "../../../ui/global/Button";
+import Textarea from "../../../ui/form/Textarea";
 
 // ui
 import SpinnerMini from "../../../ui/spinner/SpinnerMini";
-import Textarea from "../../../ui/form/Textarea";
 
 function ContactForm({ sign }) {
     const navigate = useNavigate();
@@ -22,28 +25,26 @@ function ContactForm({ sign }) {
     const [errorsMessage, setErrorsMessage] = useState("");
     const [showPassword, setShowPassword] = useState(false);
 
-    const {
-        register: registerForm,
-        formState,
-        getValues,
-        handleSubmit,
-        reset,
-    } = useForm();
+    let { userData, userProfile } = useUserData();
+    let userPhoneNumber = userProfile?.phone_number;
+    let userFullName = userData?.full_name;
+    let userEmail = userData?.email;
+
+    const { register, formState, getValues, handleSubmit, reset } = useForm();
     const { errors } = formState;
 
-    const handleSignUp = async ({
-        first_name,
-        last_name,
+    const handleContact = async ({
+        full_name,
+        phone_number,
         email,
-        password,
-        passwordConfirm,
+        message,
     }) => {
         return;
         // try {
-        //     // console.log(`errors`, typeof errors.root);
         //     if (errors.root) {
         //         return;
         //     }
+
         //     const { data, error } = await userRegister(
         //         first_name,
         //         last_name,
@@ -51,11 +52,11 @@ function ContactForm({ sign }) {
         //         password,
         //         passwordConfirm
         //     );
-        //     // console.log(`--->`, data);
+
         //     if (error) {
-        //         if (error?.message?.email[0]) {
-        //             setErrorsMessage(error?.message?.email[0]);
-        //             Toast("error", `${error?.message?.email[0]}.`);
+        //         if (error?.message) {
+        //             setErrorsMessage(error?.message);
+        //             Toast("error", `${error?.message}.`);
         //             setIsLoading(false);
         //         }
         //     } else {
@@ -76,7 +77,7 @@ function ContactForm({ sign }) {
 
     return (
         <>
-            <Form onSubmit={handleSubmit(handleSignUp)}>
+            <Form onSubmit={handleSubmit(handleContact)}>
                 <FormRowVertical
                     label="Full Name"
                     error={errors?.full_name?.message}
@@ -86,9 +87,9 @@ function ContactForm({ sign }) {
                         id="full_name"
                         name="full_name"
                         disabled={isLoading}
-                        {...registerForm("full_name", {
+                        {...register("full_name", {
                             required: `This field is required`,
-                            // value: "mazen",
+                            value: userFullName || "",
                         })}
                         autoComplete="off"
                         required
@@ -104,14 +105,14 @@ function ContactForm({ sign }) {
                         id="phone_number"
                         name="phone_number"
                         disabled={isLoading}
-                        {...registerForm("phone_number", {
+                        {...register("phone_number", {
                             required: `This field is required`,
                             pattern: {
                                 value: /^01[0|1|2|5][0-9]{8}$/,
                                 // message: `Please Provide a valid phone number`,
                                 message: `Phone must be start 010, 011, 012, 015 and all number contains 11 digits`,
                             },
-                            // value: "mazen",
+                            value: userPhoneNumber || "",
                         })}
                         autoComplete="off"
                         required
@@ -127,12 +128,13 @@ function ContactForm({ sign }) {
                         id="email"
                         name="email"
                         disabled={isLoading}
-                        {...registerForm("email", {
+                        {...register("email", {
                             required: `This field is required`,
                             pattern: {
                                 value: /\S+@\S+\.\S+/,
                                 message: `Please Provide a valid email address`,
                             },
+                            value: userEmail || "",
                         })}
                         // Email regex: /\S+@\S+\.\S+/
                         autoComplete="off"
@@ -149,7 +151,7 @@ function ContactForm({ sign }) {
                         id="message"
                         name="message"
                         disabled={isLoading}
-                        {...registerForm("message", {
+                        {...register("message", {
                             required: `This field is required`,
                             // value: "mazen",
                         })}

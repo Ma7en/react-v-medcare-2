@@ -6,8 +6,6 @@ import { userAuthStore } from "../../../store/userAuthStore";
 import axios from "../axios";
 
 // Importing jwt_decode to decode JSON Web Tokens
-// import jwt_decode from "jwt-decode";
-// import * as jwt_decode from "jwt-decode";
 import { jwtDecode } from "jwt-decode";
 
 // Importing the Cookies library to handle browser cookies
@@ -93,7 +91,7 @@ export const userProfileID = async (id) => {
 
 // Function to handle user registration
 export const userProfileUpdate = async (
-    gander,
+    gender,
     image,
     phone_number,
     age,
@@ -104,7 +102,7 @@ export const userProfileUpdate = async (
         const { data, status } = await axios.put(
             `auth/patient/profile/${user}/`,
             {
-                gander,
+                gender,
                 image,
                 phone_number,
                 age,
@@ -429,19 +427,6 @@ export const getRefreshToken = async () => {
 };
 
 // =================================================================
-// Function to handle user logout
-export const logout = () => {
-    // Removing access and refresh tokens from cookies, resetting user state, and displaying success toast
-    Cookies.remove("access_token");
-    Cookies.remove("refresh_token");
-    userAuthStore.getState().setUser(null);
-
-    // Displaying a success toast notification
-    Toast.fire({
-        icon: "success",
-        title: "You have been logged out.",
-    });
-};
 
 // Function to set the authenticated user on page load
 export const setUser = async () => {

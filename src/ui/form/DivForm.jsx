@@ -8,7 +8,7 @@ const Div = styled.div`
 
     /* margin-bottom: 3.2rem; */
     width: 100%;
-    max-width: 48rem;
+    /* max-width: 48rem; */
     /* background-color: var(--color-dark--2); */
 
     /* border: 1px solid var(--color-grey-100); */

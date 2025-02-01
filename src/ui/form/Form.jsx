@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 
 const Form = styled.form`
     width: 100%;
-    max-width: 48rem;
+    /* max-width: 48rem; */
     /* box-shadow: var(--shadow-lg); */
     box-shadow: var(--box-shadow);
 

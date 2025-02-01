@@ -1,21 +1,23 @@
 /* eslint-disable no-unused-vars */
 import { useState } from "react";
-import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+
+// store
+import useUserData from "../../../store/userDataStore";
 
 // ui form
-import Form from "../form/Form";
-import FormRowVertical from "../form/FormRowVertical";
-import Input from "../form/Input";
-import Textarea from "../form/Textarea";
-import FormRow from "../form/FormRow";
-import Button from "../global/Button";
+import Form from "../../../ui/form/Form";
+import FormRowVertical from "../../../ui/form/FormRowVertical";
+import FormRow from "../../../ui/form/FormRow";
+import Input from "../../../ui/form/Input";
+import Textarea from "../../../ui/form/Textarea";
+import Button from "../../../ui/global/Button";
 
 // ui
-import SpinnerMini from "../spinner/SpinnerMini";
-import useUserData from "../../store/userDataStore";
+import SpinnerMini from "../../../ui/spinner/SpinnerMini";
 
-function BookForm() {
+function ReviewUserForm() {
     const navigate = useNavigate();
 
     const [isLoading, setIsLoading] = useState(false);
@@ -23,24 +25,32 @@ function BookForm() {
     const [showPassword, setShowPassword] = useState(false);
 
     let { userData, userProfile } = useUserData();
-    let userPhoneNumber = userProfile?.phone_number;
+    let userID = userData?.id;
     let userFullName = userData?.full_name;
-    let userEmail = userData?.email;
 
     const { register, formState, getValues, handleSubmit, reset } = useForm();
     const { errors } = formState;
 
-    const handleBook = async ({ full_name, phone_number, email, message }) => {
+    const handleReview = async ({
+        full_name,
+        phone_number,
+        email,
+        message,
+    }) => {
+        return;
         // try {
         //     if (errors.root) {
         //         return;
         //     }
+
         //     const { data, error } = await userRegister(
-        // full_name,
-        // phone_number,
-        // email,
-        // message,
+        //         first_name,
+        //         last_name,
+        //         email,
+        //         password,
+        //         passwordConfirm
         //     );
+
         //     if (error) {
         //         if (error?.message) {
         //             setErrorsMessage(error?.message);
@@ -65,7 +75,7 @@ function BookForm() {
 
     return (
         <>
-            <Form onSubmit={handleSubmit(handleBook)}>
+            <Form onSubmit={handleSubmit(handleReview)}>
                 <FormRowVertical
                     label="Full Name"
                     error={errors?.full_name?.message}
@@ -85,46 +95,23 @@ function BookForm() {
                 </FormRowVertical>
 
                 <FormRowVertical
-                    label="Phone Number"
-                    error={errors?.phone_number?.message}
+                    label="Number of Stars"
+                    error={errors?.stars?.message}
                 >
                     <Input
-                        type="text"
-                        id="phone_number"
-                        name="phone_number"
+                        type="number"
+                        id="stars"
+                        name="stars"
                         disabled={isLoading}
-                        {...register("phone_number", {
+                        {...register("stars", {
                             required: `This field is required`,
                             pattern: {
-                                value: /^01[0|1|2|5][0-9]{8}$/,
-                                // message: `Please Provide a valid phone number`,
+                                value: /^[0-9]{1}$/,
                                 message: `Phone must be start 010, 011, 012, 015 and all number contains 11 digits`,
                             },
-                            value: userPhoneNumber || "",
+                            // maxLength: 5,
+                            // max: 5,
                         })}
-                        autoComplete="off"
-                        required
-                    />
-                </FormRowVertical>
-
-                <FormRowVertical
-                    label="Email address"
-                    error={errorsMessage || errors?.email?.message}
-                >
-                    <Input
-                        type="email"
-                        id="email"
-                        name="email"
-                        disabled={isLoading}
-                        {...register("email", {
-                            required: `This field is required`,
-                            pattern: {
-                                value: /\S+@\S+\.\S+/,
-                                message: `Please Provide a valid email address`,
-                            },
-                            value: userEmail || "",
-                        })}
-                        // Email regex: /\S+@\S+\.\S+/
                         autoComplete="off"
                         required
                     />
@@ -150,7 +137,7 @@ function BookForm() {
 
                 <FormRow>
                     <Button type="submit" disabled={isLoading}>
-                        {isLoading ? <SpinnerMini /> : `Submit`}
+                        {isLoading ? <SpinnerMini /> : `Review`}
                     </Button>
                 </FormRow>
             </Form>
@@ -158,4 +145,4 @@ function BookForm() {
     );
 }
 
-export default BookForm;
+export default ReviewUserForm;
