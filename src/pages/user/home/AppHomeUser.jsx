@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import styled from "styled-components";
-// import quotes from "quotesy";
+import quotes from "quotesy";
 
 // store
 import useUserData from "../../../store/userDataStore";
@@ -72,8 +72,8 @@ const Cite = styled.cite`
 `;
 
 function AppHomeUser() {
-    // console.log(quotes.random());
-    // const { author, text } = quotes.random();
+    console.log(quotes.random());
+    const { author, text } = quotes.random();
 
     let { userData, userProfile } = useUserData();
 
@@ -91,8 +91,8 @@ function AppHomeUser() {
 
                 <Row>
                     <Blockquote>
-                        <Text>{"text"}</Text>
-                        <Cite>-{"author"}</Cite>
+                        <Text>{text}</Text>
+                        <Cite>-{author}</Cite>
                     </Blockquote>
                 </Row>
             </StyledUserAvatar>

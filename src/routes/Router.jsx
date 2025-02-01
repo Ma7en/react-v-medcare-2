@@ -298,51 +298,51 @@ function Router() {
                                 path={`/${App_User}/account`}
                                 element={<AccountUser />}
                             />
-                            {/* 
+
                             <Route
                                 path={`/${App_User}/updateprofile/:id`}
-                                element={<UpdateProfile />}
+                                element={<AccountUser />}
                             />
                             <Route
                                 path={`/${App_User}/update/profile/:id`}
-                                element={<UpdateProfile />}
+                                element={<AccountUser />}
                             />
                             <Route
                                 path={`/${App_User}/update-profile/:id`}
-                                element={<UpdateProfile />}
+                                element={<AccountUser />}
                             />
                             <Route
                                 path={`/${App_User}/profile/update/:id`}
-                                element={<UpdateProfile />}
+                                element={<AccountUser />}
                             />
                             <Route
                                 path={`/${App_User}/profile-update/:id`}
-                                element={<UpdateProfile />}
+                                element={<AccountUser />}
                             />
                             <Route
                                 path={`/${App_User}/editprofile/:id`}
-                                element={<UpdateProfile />}
+                                element={<AccountUser />}
                             />
                             <Route
                                 path={`/${App_User}/edit-profile/:id`}
-                                element={<UpdateProfile />}
+                                element={<AccountUser />}
                             />
                             <Route
                                 path={`/${App_User}/edit/profile/:id`}
-                                element={<UpdateProfile />}
+                                element={<AccountUser />}
                             />
                             <Route
                                 path={`/${App_User}/profileedit/:id`}
-                                element={<UpdateProfile />}
+                                element={<AccountUser />}
                             />
                             <Route
                                 path={`/${App_User}/profile-edit/:id`}
-                                element={<UpdateProfile />}
+                                element={<AccountUser />}
                             />
                             <Route
                                 path={`/${App_User}/profile/edit/:id`}
-                                element={<UpdateProfile />}
-                            /> */}
+                                element={<AccountUser />}
+                            />
 
                             {/* book */}
                             <Route
