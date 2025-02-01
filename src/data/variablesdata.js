@@ -7,7 +7,7 @@ export const iconscomponents = [
         id: 1,
     },
     {
-        icon: "FaUserMd",
+        icon: "FaUsers",
         number: "1040",
         title: "satisfied patients",
         id: 2,
