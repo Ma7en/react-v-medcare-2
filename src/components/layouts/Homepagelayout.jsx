@@ -1,4 +1,5 @@
-// import
+/* eslint-disable no-unused-vars */
+import styled from "styled-components";
 import { Outlet } from "react-router-dom";
 
 // ui component
@@ -6,14 +7,18 @@ import { Outlet } from "react-router-dom";
 import Header from "../../ui/header/Header";
 import Footer from "../../ui/footer/Footer";
 
+const Main = styled.main`
+    overflow: hidden;
+`;
+
 function HomepageLayout() {
     return (
         <>
             {/* <Goicon /> */}
             <Header />
-            <main>
+            <Main>
                 <Outlet />
-            </main>
+            </Main>
             <Footer />
         </>
     );
