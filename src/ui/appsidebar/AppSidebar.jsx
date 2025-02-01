@@ -12,6 +12,7 @@ import AppMainNav from "./AppMainNav";
 import Logo from "../header/Logo";
 
 const StyledSidebar = styled.aside`
+    height: 100%;
     background-color: var(--back-sec-2);
     padding: 3.2rem 1.4rem;
     border-right: 1px solid var(--color-grey-100);
@@ -30,17 +31,19 @@ const StyledSidebar = styled.aside`
 
     @media (max-width: 767px) {
         left: calc(-0% - 26rem);
-        min-height: 100vh;
+        /* min-height: 100vh; */
+        /* height: 100vh; */
         position: absolute;
         z-index: 10;
         width: 26rem;
         /* transform: translateX(-30%); */
         /* width: 0px; */
+
         &.open {
             position: absolute;
             z-index: 10;
             left: calc(0% + 0rem);
-            min-height: 100vh;
+            /* min-height: 100vh; */
             transition: var(--main-transition);
         }
     }

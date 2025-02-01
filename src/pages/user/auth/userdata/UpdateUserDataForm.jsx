@@ -8,12 +8,12 @@ import { useState } from "react";
 // import Input from "../../ui/Input";
 
 // ui
-import Form from "../../../ui/form/Form";
-import FormRow from "../../../ui/form/FormRow";
-import Input from "../../../ui/form/Input";
-import Button from "../../../ui/global/Button";
-import FileInput from "../../../ui/form/FileInput";
-import FormRowVertical from "../../../ui/form/FormRowVertical";
+import Form from "../../../../ui/form/Form";
+import FormRow from "../../../../ui/form/FormRow";
+import Input from "../../../../ui/form/Input";
+import Button from "../../../../ui/global/Button";
+import FileInput from "../../../../ui/form/FileInput";
+import FormRowVertical from "../../../../ui/form/FormRowVertical";
 
 // import { useUser } from "../../../features/authentication/useUser";
 // import { useUpdateUser } from "../../../features/authentication/useUpdateUser";

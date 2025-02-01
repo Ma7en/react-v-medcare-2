@@ -10,6 +10,9 @@ import { userChangePassword } from "../../../../services/auth/user/authUser";
 // plugin
 import Toast from "../../../../plugin/Toast";
 
+// utils
+import { App_User } from "../../../../utils/constants";
+
 // ui form
 import Form from "../../../../ui/form/Form";
 import FormRow from "../../../../ui/form/FormRow";
@@ -71,7 +74,7 @@ function UpdatePasswordForm() {
                     "success",
                     `${data?.message || "Password Changed Successfully."}`
                 );
-                navigate(`/`);
+                navigate(`/${App_User}/home`);
             }
         } catch (error) {
             console.log(`Error: ${error}`);

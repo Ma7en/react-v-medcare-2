@@ -19,9 +19,9 @@ function Select({ options, value, onChange, ...props }) {
     return (
         <>
             <StyledSelect value={value} onChange={onChange} {...props}>
-                {options.map((option) => (
-                    <option key={option.value} value={option.value}>
-                        {option.label}
+                {options?.map((option, index) => (
+                    <option key={index} value={option?.value}>
+                        {option?.label}
                     </option>
                 ))}
             </StyledSelect>

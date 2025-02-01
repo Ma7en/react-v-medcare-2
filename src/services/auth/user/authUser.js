@@ -91,6 +91,48 @@ export const userProfileID = async (id) => {
     }
 };
 
+// Function to handle user registration
+export const userProfileUpdate = async (
+    gander,
+    image,
+    phone_number,
+    age,
+    user
+) => {
+    try {
+        // Making a POST request to register a new user
+        const { data, status } = await axios.put(
+            `auth/patient/profile/${user}/`,
+            {
+                gander,
+                image,
+                phone_number,
+                age,
+                user,
+            }
+        );
+
+        // Displaying a success toast notification
+        Toast.fire({
+            icon: "success",
+            title: "Paitent Profile Updated Successfully.",
+        });
+
+        if (status === 200 || data?.code === 0) {
+            setAuthUser("", data?.data);
+        }
+
+        // Returning data and error information
+        return { data, error: null };
+    } catch (error) {
+        // Handling errors and returning data and error information
+        return {
+            data: null,
+            error: error?.response?.data || "Something went wrong",
+        };
+    }
+};
+
 // Function to handle verification account
 export const userVerifyAccount = async (otp_code) => {
     try {
@@ -188,26 +230,34 @@ export const setAuthUser = (
     access_token,
     refresh_token
 ) => {
-    // Setting access and refresh tokens in cookies with expiration dates
-    Cookies.set("userData", data, {
-        expires: 7, // Refresh token expires in 7 days
-        secure: true,
-    });
+    if (data) {
+        // Setting access and refresh tokens in cookies with expiration dates
+        Cookies.set("userData", data, {
+            expires: 7, // Refresh token expires in 7 days
+            secure: true,
+        });
+    }
 
-    Cookies.set("userProfile", userDataProfile, {
-        expires: 7, // Refresh token expires in 7 days
-        secure: true,
-    });
+    if (userDataProfile) {
+        Cookies.set("userProfile", userDataProfile, {
+            expires: 7, // Refresh token expires in 7 days
+            secure: true,
+        });
+    }
 
-    Cookies.set("access_token", access_token, {
-        expires: 1, // Access token expires in 1 day
-        secure: true,
-    });
+    if (access_token) {
+        Cookies.set("access_token", access_token, {
+            expires: 1, // Access token expires in 1 day
+            secure: true,
+        });
+    }
 
-    Cookies.set("refresh_token", refresh_token, {
-        expires: 7, // Refresh token expires in 7 days
-        secure: true,
-    });
+    if (refresh_token) {
+        Cookies.set("refresh_token", refresh_token, {
+            expires: 7, // Refresh token expires in 7 days
+            secure: true,
+        });
+    }
 
     // Decoding access token to get user information
     const user = jwtDecode(access_token) ?? null;

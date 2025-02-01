@@ -587,10 +587,10 @@ function Router() {
                             <Route path="/sign-in" element={<Login />} />
 
                             {/* change password */}
-                            <Route
+                            {/* <Route
                                 path="/changepassword"
                                 element={<ChangePassword />}
-                            />
+                            /> */}
 
                             {/*  */}
                             {/* <Route
