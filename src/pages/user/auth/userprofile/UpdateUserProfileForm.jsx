@@ -21,10 +21,11 @@ import FormRow from "../../../../ui/form/FormRow";
 import Input from "../../../../ui/form/Input";
 import Button from "../../../../ui/global/Button";
 import FormRowVertical from "../../../../ui/form/FormRowVertical";
+import SelectForm from "../../../../ui/form/SelectForm";
+import FileInput from "../../../../ui/form/FileInput";
 
 // ui
 import SpinnerMini from "../../../../ui/spinner/SpinnerMini";
-import SelectForm from "../../../../ui/form/SelectForm";
 
 function UpdateUserProfileForm() {
     const navigate = useNavigate();
@@ -33,6 +34,7 @@ function UpdateUserProfileForm() {
     const [errorsMessage, setErrorsMessage] = useState("");
     let { userData, userProfile } = useUserData();
     let user = userData?.id;
+    let userGender = userProfile?.gender;
     let userPhoneNumber = userProfile?.phone_number;
     let userAge = userProfile?.age;
 
@@ -45,67 +47,62 @@ function UpdateUserProfileForm() {
         phone_number,
         age,
     }) => {
-        console.log(`d`, gender);
-        console.log(`d`, image);
-        console.log(`d`, phone_number);
-        console.log(`d`, age);
-        // try {
-        //     if (errors.root) {
-        //         return;
-        //     }
+        try {
+            if (errors.root) {
+                return;
+            }
 
-        //     const { data, error } = await userProfileUpdate(
-        //         gander,
-        //         image,
-        //         phone_number,
-        //         age,
-        //         user
-        //     );
+            // const payload = {
+            //     gender: gender || userProfile?.gender,
+            //     image: image?.[0] || null,
+            //     phone_number: phone_number || userPhoneNumber,
+            //     age: age || userAge,
+            //     user: user || null,
+            // };
+            // console.log(`py`, payload);
+            // const { data, error } = await userProfileUpdate(payload);
+            // const { data, error } = await userProfileUpdate(
+            //     gender,
+            //     imageData,
+            //     phone_number,
+            //     age,
+            //     user
+            // );
 
-        //     if (error) {
-        //         if (error?.message && typeof error.message === "string") {
-        //             Toast("error", `${error?.message || "Invalid token"}.`);
-        //             setIsLoading(false);
-        //         }
-        //     } else {
-        //         setIsLoading(true);
-        //         Toast(
-        //             "success",
-        //             `${data?.message || "Password Changed Successfully."}`
-        //         );
-        //         navigate(`/${App_User}/home`);
-        //     }
-        // } catch (error) {
-        //     console.log(`Error: ${error}`);
-        // }
+            const { data, error } = await userProfileUpdate(
+                gender,
+                image?.[0],
+                phone_number,
+                age,
+                user
+            );
+
+            // console.log(`data`, data);
+            // console.log(`error`, error);
+
+            if (error) {
+                if (error?.message && typeof error.message === "string") {
+                    Toast("error", `${error?.message || "Invalid token"}.`);
+                    setIsLoading(false);
+                }
+            } else {
+                setIsLoading(true);
+                Toast(
+                    "success",
+                    `${
+                        data?.message || "Paitent Profile updated Successfully."
+                    }`
+                );
+                navigate(`/${App_User}/home`);
+            }
+        } catch (error) {
+            console.log(`Error: ${error}`);
+        }
     };
 
     return (
         <>
             <Form type="updata" onSubmit={handleSubmit(handleUpdateProfile)}>
-                {/* <FormRowVertical
-                    label="gender"
-                    error={errors?.phone_number?.message || errorsMessage}
-                > 
-                    <Input
-                        type="text"
-                        id="gender"
-                        name="gender"
-                        disabled={isLoading}
-                        {...register("gender", {
-                            // required: `This field is required`,
-                            // minLength: {
-                            //     value: /^01[0|1|2|5][0-9]{8}$/,
-                            //     message: `Phone must be start 010, 011, 012, 015 and all number contains 11 digits`,
-                            // },
-                            // value: "Mazen@@1",
-                        })}
-                        autoComplete="off"
-                        // required
-                    />
-                </FormRowVertical> */}
-                {/* <Select options={[{ value: "name-asc", label: "Sort by name (A-Z)" }]} /> */}
-
                 <FormRowVertical
                     label="gender"
                     error={errors?.gender?.message || errorsMessage}
@@ -119,13 +116,29 @@ function UpdateUserProfileForm() {
                             //     value: 8,
                             //     message: `Password needs a minimum of 8 characters`,
                             // },
-                            // value: "Mazen@@1",
+                            value: userGender || "",
                         })}
                         autoComplete="off"
+                        required
                     >
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
                     </SelectForm>
+                </FormRowVertical>
+
+                <FormRowVertical
+                    label="image"
+                    error={errors?.image?.message || errorsMessage}
+                >
+                    <FileInput
+                        id="image"
+                        accept="image/*"
+                        {...register("image", {
+                            // required: isEditSession
+                            //     ? false
+                            //     : "This field is required",
+                        })}
+                    />
                 </FormRowVertical>
 
                 <FormRowVertical
@@ -139,11 +152,11 @@ function UpdateUserProfileForm() {
                         disabled={isLoading}
                         {...register("phone_number", {
                             // required: `This field is required`,
-                            minLength: {
+                            pattern: {
                                 value: /^01[0|1|2|5][0-9]{8}$/,
-                                message: `Phone must be start 010, 011, 012, 015 and all number contains 11 digits`,
+                                message: `Phone number must start with 010, 011, 012, 015 and contain 11 digits.`,
                             },
-                            // value: "Mazen@@1",
+                            value: userPhoneNumber || null,
                         })}
                         autoComplete="off"
                         // required
@@ -162,7 +175,11 @@ function UpdateUserProfileForm() {
                             //     value: 8,
                             //     message: `Password needs a minimum of 8 characters`,
                             // },
-                            // value: "Mazen@@1",
+                            pattern: {
+                                value: /^[0-9]{2}$/,
+                                message: `A valid integer is required.`,
+                            },
+                            value: userAge || null,
                         })}
                         autoComplete="off"
                         // required

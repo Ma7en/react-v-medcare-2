@@ -89,7 +89,7 @@ export const userProfileID = async (id) => {
     }
 };
 
-// Function to handle user registration
+// Function to handle user Profile Update
 export const userProfileUpdate = async (
     gender,
     image,
@@ -107,6 +107,11 @@ export const userProfileUpdate = async (
                 phone_number,
                 age,
                 user,
+            },
+            {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
             }
         );
 
@@ -117,7 +122,9 @@ export const userProfileUpdate = async (
         });
 
         if (status === 200 || data?.code === 0) {
-            setAuthUser("", data?.data);
+            let userDataProfile = JSON.stringify(data?.data);
+            // console.log(`e`, userData);
+            setAuthUser("", userDataProfile);
         }
 
         // Returning data and error information
@@ -126,7 +133,7 @@ export const userProfileUpdate = async (
         // Handling errors and returning data and error information
         return {
             data: null,
-            error: error?.response?.data || "Something went wrong",
+            error: error?.response?.data,
         };
     }
 };
@@ -228,6 +235,10 @@ export const setAuthUser = (
     access_token,
     refresh_token
 ) => {
+    // console.log(`data`, data);
+    // console.log(`userDataProfile`, userDataProfile);
+    // console.log(`access_token`, access_token);
+    // console.log(`refresh_token`, refresh_token);
     if (data) {
         // Setting access and refresh tokens in cookies with expiration dates
         Cookies.set("userData", data, {

@@ -24,15 +24,18 @@ const StyledMenuFaBars = styled(FaBars)`
     -moz-transition: var(--main-transition);
     -ms-transition: var(--main-transition);
     -o-transition: var(--main-transition);
+
     @media (max-width: 767px) {
         // display: initial;
         display: flex;
         transition: var(--main-transition);
+        
         &.bars {
             animation-name: bars;
             animation-duration: 0.5s;
             left: 2rem;
         }
+
         @keyframes bars {
             from {
                 /* background-color: red; */

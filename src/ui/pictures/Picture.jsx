@@ -16,7 +16,7 @@ const StyledImage = styled.div`
 function Picture({ src, alt, caption }) {
     return (
         <>
-            <StyledImage>
+            <StyledImage data-aos="fade-right">
                 <picture>
                     <figure>
                         <img

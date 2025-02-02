@@ -72,7 +72,6 @@ const Cite = styled.cite`
 `;
 
 function AppHomeUser() {
-    console.log(quotes.random());
     const { author, text } = quotes.random();
 
     let { userData, userProfile } = useUserData();
